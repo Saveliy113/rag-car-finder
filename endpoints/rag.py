@@ -1,6 +1,9 @@
+import json
+import re
 from fastapi import APIRouter, HTTPException
 from openai import OpenAIError, APIError
 from qdrant_client.http.exceptions import UnexpectedResponse
+from qdrant_client.models import Filter, FieldCondition, Range, MatchValue
 
 from models.models import RagQueryRequest
 from loaders import get_qdrant_client, get_openai_client
@@ -15,11 +18,235 @@ def log_error(msg):
 router = APIRouter(prefix="/rag", tags=["RAG"])
 
 # Configuration constants
-SIMILARITY_THRESHOLD = 0.7  # Minimum similarity score to include results
+SIMILARITY_THRESHOLD = 0.5  # Minimum similarity score to include results
 EMBEDDING_MODEL = "text-embedding-3-small"
 CHAT_MODEL = "gpt-4o-mini"
 CHAT_TEMPERATURE = 0.7
 COLLECTION_NAME = "cars"
+
+
+def extract_filters_from_query(query: str, openai_client) -> dict:
+    """
+    Use GPT to extract structured filters from natural language query
+    Returns a dictionary with extracted filters
+    """
+    filter_prompt = f"""Extract filters from this car search query in JSON format.
+Query: "{query}"
+
+Extract the following information if mentioned:
+- max_price: Maximum price in tenge (extract numeric value, e.g., "до 15 000 000 тенге" -> 15000000)
+- min_price: Minimum price in tenge
+- max_mileage: Maximum mileage in km (extract numeric value)
+- min_mileage: Minimum mileage in km
+- color: Car color (exact match)
+- city: City name (exact match)
+- year_preference: "newest", "oldest", or specific year (e.g., 2020)
+- engine: Engine type (e.g., "2.5 (бензин)")
+
+Return ONLY valid JSON in this format:
+{{
+    "max_price": null or number,
+    "min_price": null or number,
+    "max_mileage": null or number,
+    "min_mileage": null or number,
+    "color": null or string,
+    "city": null or string,
+    "year_preference": null or "newest" or "oldest" or year number,
+    "engine": null or string
+}}
+
+If a filter is not mentioned, use null. Return ONLY the JSON, no other text."""
+
+    try:
+        response = openai_client.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that extracts structured data from queries. Return only valid JSON."},
+                {"role": "user", "content": filter_prompt}
+            ],
+            temperature=0.1,  # Low temperature for consistent extraction
+            max_tokens=200
+        )
+        
+        json_str = response.choices[0].message.content.strip()
+        # Remove markdown code blocks if present
+        json_str = re.sub(r'```json\s*', '', json_str)
+        json_str = re.sub(r'```\s*', '', json_str)
+        
+        filters = json.loads(json_str)
+        log(f"Extracted filters: {filters}")
+        return filters
+    except Exception as e:
+        log_error(f"Error extracting filters: {e}")
+        return {}
+
+
+def build_qdrant_filter(filters: dict) -> Filter:
+    """
+    Build Qdrant Filter object from extracted filters
+    Uses numeric fields: price_num, mileage_num, year_num
+    """
+    conditions = []
+    
+    # Price filter (using price_num field)
+    if filters.get("max_price") is not None and filters.get("min_price") is not None:
+        # Both min and max price
+        conditions.append(
+            FieldCondition(
+                key="price_num",
+                range=Range(gte=filters["min_price"], lte=filters["max_price"])
+            )
+        )
+    elif filters.get("max_price") is not None:
+        conditions.append(
+            FieldCondition(
+                key="price_num",
+                range=Range(lte=filters["max_price"])
+            )
+        )
+    elif filters.get("min_price") is not None:
+        conditions.append(
+            FieldCondition(
+                key="price_num",
+                range=Range(gte=filters["min_price"])
+            )
+        )
+    
+    # Mileage filter (using mileage_num field)
+    if filters.get("max_mileage") is not None and filters.get("min_mileage") is not None:
+        # Both min and max mileage
+        conditions.append(
+            FieldCondition(
+                key="mileage_num",
+                range=Range(gte=filters["min_mileage"], lte=filters["max_mileage"])
+            )
+        )
+    elif filters.get("max_mileage") is not None:
+        conditions.append(
+            FieldCondition(
+                key="mileage_num",
+                range=Range(lte=filters["max_mileage"])
+            )
+        )
+    elif filters.get("min_mileage") is not None:
+        conditions.append(
+            FieldCondition(
+                key="mileage_num",
+                range=Range(gte=filters["min_mileage"])
+            )
+        )
+    
+    # Year filter (using modelYear field)
+    if filters.get("year_preference") and isinstance(filters["year_preference"], int):
+        # Specific year
+        conditions.append(
+            FieldCondition(
+                key="modelYear",
+                match=MatchValue(value=filters["year_preference"])
+            )
+        )
+        # Note: "newest" and "oldest" will be handled by sorting after search
+    
+    # Color filter
+    if filters.get("color"):
+        conditions.append(
+            FieldCondition(
+                key="color",
+                match=MatchValue(value=filters["color"])
+            )
+        )
+    
+    # City filter
+    if filters.get("city"):
+        conditions.append(
+            FieldCondition(
+                key="city",
+                match=MatchValue(value=filters["city"])
+            )
+        )
+    
+    # Engine filter
+    if filters.get("engine"):
+        conditions.append(
+            FieldCondition(
+                key="engine",
+                match=MatchValue(value=filters["engine"])
+            )
+        )
+    
+    if conditions:
+        return Filter(must=conditions)
+    return None
+
+
+def _matches_filter(car_payload: dict, filters: dict) -> bool:
+    """Check if car matches filter criteria (for post-processing fallback)"""
+    # Price filter
+    if filters.get("max_price") is not None:
+        price_num = car_payload.get("price_num")
+        if price_num is None or price_num > filters["max_price"]:
+            return False
+    
+    if filters.get("min_price") is not None:
+        price_num = car_payload.get("price_num")
+        if price_num is None or price_num < filters["min_price"]:
+            return False
+    
+    # Mileage filter
+    if filters.get("max_mileage") is not None:
+        mileage_num = car_payload.get("mileage_num")
+        if mileage_num is not None and mileage_num > filters["max_mileage"]:
+            return False
+    
+    if filters.get("min_mileage") is not None:
+        mileage_num = car_payload.get("mileage_num")
+        if mileage_num is not None and mileage_num < filters["min_mileage"]:
+            return False
+    
+    # Year filter (exact match only, newest/oldest handled by sorting)
+    if filters.get("year_preference") and isinstance(filters["year_preference"], int):
+        model_year = car_payload.get("modelYear")
+        if model_year != filters["year_preference"]:
+            return False
+    
+    # Color filter
+    if filters.get("color"):
+        if car_payload.get("color") != filters["color"]:
+            return False
+    
+    # City filter
+    if filters.get("city"):
+        if car_payload.get("city") != filters["city"]:
+            return False
+    
+    # Engine filter
+    if filters.get("engine"):
+        if car_payload.get("engine") != filters["engine"]:
+            return False
+    
+    return True
+
+
+def sort_results_by_year_preference(results, filters: dict):
+    """Sort results by year preference (newest/oldest) if specified"""
+    if not filters.get("year_preference"):
+        return results
+    
+    if filters["year_preference"] == "newest":
+        # Sort by modelYear descending
+        return sorted(
+            results,
+            key=lambda x: x.payload.get("modelYear") or 0,
+            reverse=True
+        )
+    elif filters["year_preference"] == "oldest":
+        # Sort by modelYear ascending
+        return sorted(
+            results,
+            key=lambda x: x.payload.get("modelYear") or 9999
+        )
+    
+    return results
 
 
 @router.post("/search")
@@ -28,9 +255,10 @@ async def search_cars(request: RagQueryRequest):
     Search for cars using RAG (Retrieval-Augmented Generation)
 
     This endpoint:
-    1. Creates an embedding for the user's query
-    2. Searches the vector database for similar cars
-    3. Uses GPT to generate a natural language response with recommendations
+    1. Preprocesses query with GPT to extract filters
+    2. Creates an embedding for the user's query
+    3. Searches the vector database with filters
+    4. Uses GPT to generate a natural language response with recommendations
     """
     try:
         # Get clients (already initialized at startup)
@@ -39,7 +267,12 @@ async def search_cars(request: RagQueryRequest):
 
         log(f"Processing query: {request.question}")
 
-        # Step 1: Create embedding for the query
+        # Extracting and building filters from query using GPT
+        log("Extracting filters from query")
+        filters = extract_filters_from_query(request.question, openai_client)
+        qdrant_filter = build_qdrant_filter(filters)
+
+        # Creating embedding for the query
         try:
             log("Creating embedding for query")
             embedding_response = openai_client.embeddings.create(
@@ -55,29 +288,54 @@ async def search_cars(request: RagQueryRequest):
                 detail=f"Failed to create embedding: {str(e)}"
             )
 
-        # Step 2: Search in Qdrant
+        # Searching in Qdrant with filters
         try:
-            log(f"Searching Qdrant with top_k={request.top_k}")
+            log(f"Searching Qdrant with top_k={request.top_k}, filters: {filters}")
             
-            # Use query_points - the correct method for Qdrant client
-            # It returns a QueryResult object with .points attribute
+            # query_points doesn't support filters in this Qdrant client version
+            # So we'll search without filter and apply filters in post-processing
+            # This is still efficient as we get top results first, then filter
+            
             query_result = qdrant_client.query_points(
                 collection_name=COLLECTION_NAME,
                 query=query_embedding,
-                limit=request.top_k
+                limit=request.top_k * 5 if qdrant_filter else request.top_k  # Get more if filtering
             )
             
-            # Extract points from QueryResult - it has a .points attribute
-            search_results = query_result.points
+            # Extract points from QueryResult
+            if hasattr(query_result, 'points'):
+                search_results = query_result.points
+            elif isinstance(query_result, list):
+                search_results = query_result
+            else:
+                search_results = []
+            
+            log(f"Initial search returned {len(search_results)} results")
+            
+            # Apply filters in post-processing (since query_points doesn't support filters)
+            if qdrant_filter and len(search_results) > 0:
+                original_count = len(search_results)
+                search_results = [
+                    r for r in search_results
+                    if _matches_filter(r.payload, filters)
+                ]
+                log(f"After filtering: {original_count} -> {len(search_results)} results")
+                
+                # If we filtered out too many, we might need more results
+                # But for now, just use what we have
 
-            # Filter results by similarity threshold
+            # Filter by similarity threshold
             filtered_results = [
                 result for result in search_results
                 if result.score >= SIMILARITY_THRESHOLD
             ]
+            
+            # Sort by year preference if specified (newest/oldest)
+            filtered_results = sort_results_by_year_preference(filtered_results, filters)
+            
             log(
-                f"Found {len(filtered_results)} results above threshold "
-                f"{SIMILARITY_THRESHOLD} (from {len(search_results)} total)"
+                f"Found {len(filtered_results)} results after filtering "
+                f"(from {len(search_results)} initial results)"
             )
             search_results = filtered_results
         except (UnexpectedResponse, Exception) as e:

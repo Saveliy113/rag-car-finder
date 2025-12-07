@@ -7,7 +7,10 @@
     "color": "серебристый металлик",
     "engine": "2.4 (бензин)",
     "price": "4 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/166222492"
+    "url": "https://kolesa.kz/a/show/166222492",
+    "price_num": 4800000.0,
+    "mileage_num": 286000.0,
+    "modelYear": 2005
   },
   {
     "city": "Жанакорган",
@@ -17,7 +20,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "14 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165993644"
+    "url": "https://kolesa.kz/a/show/165993644",
+    "price_num": 14000000.0,
+    "mileage_num": 125000.0,
+    "modelYear": 2018
   },
   {
     "city": "Алматы",
@@ -27,7 +33,9 @@
     "color": "",
     "engine": "2.5 (бензин)",
     "price": "8 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165125858"
+    "url": "https://kolesa.kz/a/show/165125858",
+    "price_num": 8000000.0,
+    "modelYear": 2014
   },
   {
     "city": "Шымкент",
@@ -37,7 +45,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "16 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165982504"
+    "url": "https://kolesa.kz/a/show/165982504",
+    "price_num": 16000000.0,
+    "mileage_num": 109000.0,
+    "modelYear": 2019
   },
   {
     "city": "Алматы",
@@ -47,7 +58,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "13 850 000 ₸",
-    "url": "https://kolesa.kz/a/show/165956457"
+    "url": "https://kolesa.kz/a/show/165956457",
+    "price_num": 13850000.0,
+    "mileage_num": 109577.0,
+    "modelYear": 2018
   },
   {
     "city": "Алматы",
@@ -57,7 +71,10 @@
     "color": "зеленый металлик",
     "engine": "3 (бензин)",
     "price": "2 650 000 ₸",
-    "url": "https://kolesa.kz/a/show/165933608"
+    "url": "https://kolesa.kz/a/show/165933608",
+    "price_num": 2650000.0,
+    "mileage_num": 350000.0,
+    "modelYear": 1995
   },
   {
     "city": "Астана",
@@ -67,7 +84,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "13 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165920755"
+    "url": "https://kolesa.kz/a/show/165920755",
+    "price_num": 13500000.0,
+    "mileage_num": 155000.0,
+    "modelYear": 2019
   },
   {
     "city": "Алматы",
@@ -77,7 +97,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "12 820 000 ₸",
-    "url": "https://kolesa.kz/a/show/153570969"
+    "url": "https://kolesa.kz/a/show/153570969",
+    "price_num": 12820000.0,
+    "mileage_num": 113445.0,
+    "modelYear": 2018
   },
   {
     "city": "Атырау",
@@ -87,7 +110,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "14 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166215736"
+    "url": "https://kolesa.kz/a/show/166215736",
+    "price_num": 14500000.0,
+    "mileage_num": 86000.0,
+    "modelYear": 2022
   },
   {
     "city": "Алматы",
@@ -97,7 +123,10 @@
     "color": "серый металлик",
     "engine": "2.4 (бензин)",
     "price": "7 300 000 ₸",
-    "url": "https://kolesa.kz/a/show/166212193"
+    "url": "https://kolesa.kz/a/show/166212193",
+    "price_num": 7300000.0,
+    "mileage_num": 282448.0,
+    "modelYear": 2008
   },
   {
     "city": "Семей",
@@ -107,7 +136,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "12 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166207730"
+    "url": "https://kolesa.kz/a/show/166207730",
+    "price_num": 12500000.0,
+    "mileage_num": 165000.0,
+    "modelYear": 2016
   },
   {
     "city": "Алматы",
@@ -117,7 +149,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "15 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/164380525"
+    "url": "https://kolesa.kz/a/show/164380525",
+    "price_num": 15000000.0,
+    "mileage_num": 5.0,
+    "modelYear": 2023
   },
   {
     "city": "Алматы",
@@ -127,7 +162,10 @@
     "color": "черный металлик",
     "engine": "3.5 (бензин)",
     "price": "12 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/135776814"
+    "url": "https://kolesa.kz/a/show/135776814",
+    "price_num": 12500000.0,
+    "mileage_num": 205000.0,
+    "modelYear": 2014
   },
   {
     "city": "Шымкент",
@@ -137,7 +175,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "12 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165896697"
+    "url": "https://kolesa.kz/a/show/165896697",
+    "price_num": 12200000.0,
+    "mileage_num": 46000.0,
+    "modelYear": 2019
   },
   {
     "city": "Алматы",
@@ -147,7 +188,10 @@
     "color": "белый металлик",
     "engine": "2.5 (гибрид)",
     "price": "17 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/165848191"
+    "url": "https://kolesa.kz/a/show/165848191",
+    "price_num": 17800000.0,
+    "mileage_num": 16500.0,
+    "modelYear": 2021
   },
   {
     "city": "Шымкент",
@@ -157,7 +201,10 @@
     "color": "коричневый металлик",
     "engine": "2.5 (бензин)",
     "price": "9 400 000 ₸",
-    "url": "https://kolesa.kz/a/show/166161880"
+    "url": "https://kolesa.kz/a/show/166161880",
+    "price_num": 9400000.0,
+    "mileage_num": 168000.0,
+    "modelYear": 2014
   },
   {
     "city": "Алматы",
@@ -167,7 +214,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "18 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165288557"
+    "url": "https://kolesa.kz/a/show/165288557",
+    "price_num": 18000000.0,
+    "mileage_num": 20000.0,
+    "modelYear": 2023
   },
   {
     "city": "Актау",
@@ -177,7 +227,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "7 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/165814463"
+    "url": "https://kolesa.kz/a/show/165814463",
+    "price_num": 7800000.0,
+    "mileage_num": 242.0,
+    "modelYear": 2012
   },
   {
     "city": "Семей",
@@ -187,7 +240,10 @@
     "color": "бежевый",
     "engine": "2.5 (бензин)",
     "price": "21 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/163189565"
+    "url": "https://kolesa.kz/a/show/163189565",
+    "price_num": 21000000.0,
+    "mileage_num": 7100.0,
+    "modelYear": 2023
   },
   {
     "city": "Актау",
@@ -197,7 +253,10 @@
     "color": "бежевый",
     "engine": "2.4 (бензин)",
     "price": "5 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/166128869"
+    "url": "https://kolesa.kz/a/show/166128869",
+    "price_num": 5200000.0,
+    "mileage_num": 300000.0,
+    "modelYear": 2006
   },
   {
     "city": "Актау",
@@ -207,7 +266,10 @@
     "color": "золотистый",
     "engine": "2.4 (бензин)",
     "price": "5 400 000 ₸",
-    "url": "https://kolesa.kz/a/show/165767613"
+    "url": "https://kolesa.kz/a/show/165767613",
+    "price_num": 5400000.0,
+    "mileage_num": 250000.0,
+    "modelYear": 2002
   },
   {
     "city": "Шымкент",
@@ -217,7 +279,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "9 300 000 ₸",
-    "url": "https://kolesa.kz/a/show/165746877"
+    "url": "https://kolesa.kz/a/show/165746877",
+    "price_num": 9300000.0,
+    "mileage_num": 175000.0,
+    "modelYear": 2013
   },
   {
     "city": "Алматы",
@@ -227,7 +292,9 @@
     "color": "синий металлик",
     "engine": "2.4 (бензин)",
     "price": "5 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/166005455"
+    "url": "https://kolesa.kz/a/show/166005455",
+    "price_num": 5800000.0,
+    "modelYear": 2006
   },
   {
     "city": "Актау",
@@ -237,7 +304,10 @@
     "color": "черный металлик",
     "engine": "2.5 (газ-бензин)",
     "price": "10 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165985614"
+    "url": "https://kolesa.kz/a/show/165985614",
+    "price_num": 10500000.0,
+    "mileage_num": 123000.0,
+    "modelYear": 2017
   },
   {
     "city": "Шымкент",
@@ -247,7 +317,10 @@
     "color": "серебристый металлик",
     "engine": "2.5 (бензин)",
     "price": "9 300 000 ₸",
-    "url": "https://kolesa.kz/a/show/165669891"
+    "url": "https://kolesa.kz/a/show/165669891",
+    "price_num": 9300000.0,
+    "mileage_num": 267121.0,
+    "modelYear": 2012
   },
   {
     "city": "Алматы",
@@ -257,7 +330,10 @@
     "color": "белый металлик",
     "engine": "2.5 (бензин)",
     "price": "15 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165957442"
+    "url": "https://kolesa.kz/a/show/165957442",
+    "price_num": 15000000.0,
+    "mileage_num": 73000.0,
+    "modelYear": 2019
   },
   {
     "city": "Алматы",
@@ -267,7 +343,10 @@
     "color": "серый",
     "engine": "2.4 (бензин)",
     "price": "4 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/166213313"
+    "url": "https://kolesa.kz/a/show/166213313",
+    "price_num": 4900000.0,
+    "mileage_num": 368000.0,
+    "modelYear": 2003
   },
   {
     "city": "Шымкент",
@@ -277,7 +356,9 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "12 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165538157"
+    "url": "https://kolesa.kz/a/show/165538157",
+    "price_num": 12200000.0,
+    "modelYear": 2019
   },
   {
     "city": "Шымкент",
@@ -287,7 +368,9 @@
     "color": "серебристый",
     "engine": "2.4 (бензин)",
     "price": "5 550 000 ₸",
-    "url": "https://kolesa.kz/a/show/165533252"
+    "url": "https://kolesa.kz/a/show/165533252",
+    "price_num": 5550000.0,
+    "modelYear": 2004
   },
   {
     "city": "Алматы",
@@ -297,7 +380,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "13 360 000 ₸",
-    "url": "https://kolesa.kz/a/show/161229436"
+    "url": "https://kolesa.kz/a/show/161229436",
+    "price_num": 13360000.0,
+    "mileage_num": 69511.0,
+    "modelYear": 2018
   },
   {
     "city": "Алматы",
@@ -307,7 +393,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "15 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165814187"
+    "url": "https://kolesa.kz/a/show/165814187",
+    "price_num": 15000000.0,
+    "mileage_num": 49500.0,
+    "modelYear": 2021
   },
   {
     "city": "Шымкент",
@@ -317,7 +406,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "10 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165808080"
+    "url": "https://kolesa.kz/a/show/165808080",
+    "price_num": 10500000.0,
+    "mileage_num": 233919.0,
+    "modelYear": 2013
   },
   {
     "city": "Тараз",
@@ -327,7 +419,10 @@
     "color": "серебристый",
     "engine": "2.5 (бензин)",
     "price": "10 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165806164"
+    "url": "https://kolesa.kz/a/show/165806164",
+    "price_num": 10500000.0,
+    "mileage_num": 178740.0,
+    "modelYear": 2012
   },
   {
     "city": "Актобе",
@@ -337,7 +432,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "7 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/162802258"
+    "url": "https://kolesa.kz/a/show/162802258",
+    "price_num": 7500000.0,
+    "mileage_num": 138000.0,
+    "modelYear": 2017
   },
   {
     "city": "Астана",
@@ -347,7 +445,9 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "19 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/156718603"
+    "url": "https://kolesa.kz/a/show/156718603",
+    "price_num": 19900000.0,
+    "modelYear": 2023
   },
   {
     "city": "Астана",
@@ -357,7 +457,9 @@
     "color": "красный",
     "engine": "2.5 (бензин)",
     "price": "21 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/161687185"
+    "url": "https://kolesa.kz/a/show/161687185",
+    "price_num": 21500000.0,
+    "modelYear": 2023
   },
   {
     "city": "Астана",
@@ -367,7 +469,9 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "19 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/158004348"
+    "url": "https://kolesa.kz/a/show/158004348",
+    "price_num": 19900000.0,
+    "modelYear": 2023
   },
   {
     "city": "Астана",
@@ -377,7 +481,9 @@
     "color": "красный",
     "engine": "2.5 (бензин)",
     "price": "19 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/160283326"
+    "url": "https://kolesa.kz/a/show/160283326",
+    "price_num": 19900000.0,
+    "modelYear": 2023
   },
   {
     "city": "Кызылорда",
@@ -387,7 +493,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "8 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/165880229"
+    "url": "https://kolesa.kz/a/show/165880229",
+    "price_num": 8900000.0,
+    "mileage_num": 160800.0,
+    "modelYear": 2013
   },
   {
     "city": "Алматы",
@@ -397,7 +506,10 @@
     "color": "",
     "engine": "2.5 (бензин)",
     "price": "13 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165978682"
+    "url": "https://kolesa.kz/a/show/165978682",
+    "price_num": 13000000.0,
+    "mileage_num": 175000.0,
+    "modelYear": 2015
   },
   {
     "city": "Актобе",
@@ -407,7 +519,9 @@
     "color": "серебристый металлик",
     "engine": "2.5 (бензин)",
     "price": "6 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/165744846"
+    "url": "https://kolesa.kz/a/show/165744846",
+    "price_num": 6800000.0,
+    "modelYear": 2009
   },
   {
     "city": "Караганда",
@@ -417,7 +531,9 @@
     "color": "",
     "engine": "3 (бензин)",
     "price": "5 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165628521"
+    "url": "https://kolesa.kz/a/show/165628521",
+    "price_num": 5500000.0,
+    "modelYear": 2003
   },
   {
     "city": "Атырау",
@@ -427,7 +543,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "5 300 000 ₸",
-    "url": "https://kolesa.kz/a/show/165606126"
+    "url": "https://kolesa.kz/a/show/165606126",
+    "price_num": 5300000.0,
+    "mileage_num": 232000.0,
+    "modelYear": 2011
   },
   {
     "city": "Костанай",
@@ -437,7 +556,9 @@
     "color": "черный металлик",
     "engine": "2.4 (бензин)",
     "price": "5 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/164591599"
+    "url": "https://kolesa.kz/a/show/164591599",
+    "price_num": 5900000.0,
+    "modelYear": 2006
   },
   {
     "city": "Петропавловск",
@@ -447,7 +568,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "9 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165740185"
+    "url": "https://kolesa.kz/a/show/165740185",
+    "price_num": 9000000.0,
+    "mileage_num": 214939.0,
+    "modelYear": 2013
   },
   {
     "city": "Шымкент",
@@ -457,7 +581,10 @@
     "color": "жёлтый",
     "engine": "2.2 (бензин)",
     "price": "3 400 000 ₸",
-    "url": "https://kolesa.kz/a/show/166222217"
+    "url": "https://kolesa.kz/a/show/166222217",
+    "price_num": 3400000.0,
+    "mileage_num": 366095.0,
+    "modelYear": 1998
   },
   {
     "city": "Алматы",
@@ -467,7 +594,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "12 590 000 ₸",
-    "url": "https://kolesa.kz/a/show/163136674"
+    "url": "https://kolesa.kz/a/show/163136674",
+    "price_num": 12590000.0,
+    "mileage_num": 186383.0,
+    "modelYear": 2018
   },
   {
     "city": "Алматы",
@@ -477,7 +607,10 @@
     "color": "серебристый",
     "engine": "2.5 (бензин)",
     "price": "12 010 000 ₸",
-    "url": "https://kolesa.kz/a/show/160000268"
+    "url": "https://kolesa.kz/a/show/160000268",
+    "price_num": 12010000.0,
+    "mileage_num": 288278.0,
+    "modelYear": 2018
   },
   {
     "city": "Караганда",
@@ -487,7 +620,10 @@
     "color": "черный металлик",
     "engine": "2.4 (бензин)",
     "price": "4 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165938008"
+    "url": "https://kolesa.kz/a/show/165938008",
+    "price_num": 4000000.0,
+    "mileage_num": 340000.0,
+    "modelYear": 2002
   },
   {
     "city": "Астана",
@@ -497,7 +633,10 @@
     "color": "черный металлик",
     "engine": "3 (бензин)",
     "price": "6 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166204611"
+    "url": "https://kolesa.kz/a/show/166204611",
+    "price_num": 6500000.0,
+    "mileage_num": 400000.0,
+    "modelYear": 2005
   },
   {
     "city": "Алматы",
@@ -507,7 +646,9 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "14 590 000 ₸",
-    "url": "https://kolesa.kz/a/show/166205645"
+    "url": "https://kolesa.kz/a/show/166205645",
+    "price_num": 14590000.0,
+    "modelYear": 2017
   },
   {
     "city": "Алматы",
@@ -517,7 +658,9 @@
     "color": "",
     "engine": "2.2 (бензин)",
     "price": "2 900 000 ₸",
-    "url": "https://kolesa.kz/a/show/166199717"
+    "url": "https://kolesa.kz/a/show/166199717",
+    "price_num": 2900000.0,
+    "modelYear": 1999
   },
   {
     "city": "Аягоз",
@@ -527,7 +670,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "9 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166198391"
+    "url": "https://kolesa.kz/a/show/166198391",
+    "price_num": 9500000.0,
+    "mileage_num": 181704.0,
+    "modelYear": 2014
   },
   {
     "city": "Шымкент",
@@ -537,7 +683,9 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "9 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/166188463"
+    "url": "https://kolesa.kz/a/show/166188463",
+    "price_num": 9000000.0,
+    "modelYear": 2015
   },
   {
     "city": "Астана",
@@ -547,7 +695,9 @@
     "color": "",
     "engine": "2.4 (бензин)",
     "price": "4 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165002832"
+    "url": "https://kolesa.kz/a/show/165002832",
+    "price_num": 4200000.0,
+    "modelYear": 2004
   },
   {
     "city": "Алматы",
@@ -557,7 +707,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "12 510 000 ₸",
-    "url": "https://kolesa.kz/a/show/161653824"
+    "url": "https://kolesa.kz/a/show/161653824",
+    "price_num": 12510000.0,
+    "mileage_num": 54927.0,
+    "modelYear": 2022
   },
   {
     "city": "Астана",
@@ -567,7 +720,10 @@
     "color": "белый металлик",
     "engine": "3 (бензин)",
     "price": "4 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/165611828"
+    "url": "https://kolesa.kz/a/show/165611828",
+    "price_num": 4800000.0,
+    "mileage_num": 259169.0,
+    "modelYear": 2006
   },
   {
     "city": "Алматы",
@@ -577,7 +733,9 @@
     "color": "белый",
     "engine": "3 (бензин)",
     "price": "2 450 000 ₸",
-    "url": "https://kolesa.kz/a/show/166219209"
+    "url": "https://kolesa.kz/a/show/166219209",
+    "price_num": 2450000.0,
+    "modelYear": 1993
   },
   {
     "city": "Астана",
@@ -587,7 +745,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "7 300 000 ₸",
-    "url": "https://kolesa.kz/a/show/166211941"
+    "url": "https://kolesa.kz/a/show/166211941",
+    "price_num": 7300000.0,
+    "mileage_num": 228000.0,
+    "modelYear": 2010
   },
   {
     "city": "Аксай",
@@ -597,7 +758,10 @@
     "color": "серебристый металлик",
     "engine": "2.4 (бензин)",
     "price": "5 600 000 ₸",
-    "url": "https://kolesa.kz/a/show/166209259"
+    "url": "https://kolesa.kz/a/show/166209259",
+    "price_num": 5600000.0,
+    "mileage_num": 380000.0,
+    "modelYear": 2005
   },
   {
     "city": "Алматы",
@@ -607,7 +771,9 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "10 250 000 ₸",
-    "url": "https://kolesa.kz/a/show/165879236"
+    "url": "https://kolesa.kz/a/show/165879236",
+    "price_num": 10250000.0,
+    "modelYear": 2013
   },
   {
     "city": "Алматы",
@@ -617,7 +783,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "14 150 000 ₸",
-    "url": "https://kolesa.kz/a/show/166070590?fromUserSearch=1"
+    "url": "https://kolesa.kz/a/show/166070590?fromUserSearch=1",
+    "price_num": 14150000.0,
+    "mileage_num": 61394.0,
+    "modelYear": 2018
   },
   {
     "city": "Актау",
@@ -627,7 +796,10 @@
     "color": "синий",
     "engine": "2.5 (бензин)",
     "price": "12 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/166202040"
+    "url": "https://kolesa.kz/a/show/166202040",
+    "price_num": 12000000.0,
+    "mileage_num": 131000.0,
+    "modelYear": 2017
   },
   {
     "city": "Алматы",
@@ -637,7 +809,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "15 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166025697"
+    "url": "https://kolesa.kz/a/show/166025697",
+    "price_num": 15500000.0,
+    "mileage_num": 8900.0,
+    "modelYear": 2023
   },
   {
     "city": "Алматы",
@@ -647,7 +822,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "16 700 000 ₸",
-    "url": "https://kolesa.kz/a/show/164761777"
+    "url": "https://kolesa.kz/a/show/164761777",
+    "price_num": 16700000.0,
+    "mileage_num": 1.0,
+    "modelYear": 2023
   },
   {
     "city": "Актау",
@@ -657,7 +835,10 @@
     "color": "синий",
     "engine": "2.5 (бензин)",
     "price": "10 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/166088310"
+    "url": "https://kolesa.kz/a/show/166088310",
+    "price_num": 10000000.0,
+    "mileage_num": 100000.0,
+    "modelYear": 2014
   },
   {
     "city": "Алматы",
@@ -667,7 +848,10 @@
     "color": "синий металлик",
     "engine": "2.4 (бензин)",
     "price": "6 350 000 ₸",
-    "url": "https://kolesa.kz/a/show/166007472"
+    "url": "https://kolesa.kz/a/show/166007472",
+    "price_num": 6350000.0,
+    "mileage_num": 240000.0,
+    "modelYear": 2007
   },
   {
     "city": "Алматы",
@@ -677,7 +861,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "11 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165929848"
+    "url": "https://kolesa.kz/a/show/165929848",
+    "price_num": 11000000.0,
+    "mileage_num": 100000.0,
+    "modelYear": 2016
   },
   {
     "city": "Актобе",
@@ -687,7 +874,10 @@
     "color": "белый металлик",
     "engine": "2.4 (бензин)",
     "price": "6 400 000 ₸",
-    "url": "https://kolesa.kz/a/show/163521573"
+    "url": "https://kolesa.kz/a/show/163521573",
+    "price_num": 6400000.0,
+    "mileage_num": 252613.0,
+    "modelYear": 2007
   },
   {
     "city": "Алматы",
@@ -697,7 +887,10 @@
     "color": "синий",
     "engine": "2.5 (бензин)",
     "price": "14 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/166095976"
+    "url": "https://kolesa.kz/a/show/166095976",
+    "price_num": 14000000.0,
+    "mileage_num": 180000.0,
+    "modelYear": 2018
   },
   {
     "city": "Шымкент",
@@ -707,7 +900,9 @@
     "color": "серебристый металлик",
     "engine": "2.5 (бензин)",
     "price": "13 600 000 ₸",
-    "url": "https://kolesa.kz/a/show/166081472"
+    "url": "https://kolesa.kz/a/show/166081472",
+    "price_num": 13600000.0,
+    "modelYear": 2022
   },
   {
     "city": "Астана",
@@ -717,7 +912,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "15 550 000 ₸",
-    "url": "https://kolesa.kz/a/show/166073803"
+    "url": "https://kolesa.kz/a/show/166073803",
+    "price_num": 15550000.0,
+    "mileage_num": 128164.0,
+    "modelYear": 2019
   },
   {
     "city": "Алматы",
@@ -727,7 +925,10 @@
     "color": "",
     "engine": "2.5 (бензин)",
     "price": "11 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/166064806"
+    "url": "https://kolesa.kz/a/show/166064806",
+    "price_num": 11000000.0,
+    "mileage_num": 125000.0,
+    "modelYear": 2019
   },
   {
     "city": "Уральск",
@@ -737,7 +938,9 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "7 100 000 ₸",
-    "url": "https://kolesa.kz/a/show/166050187"
+    "url": "https://kolesa.kz/a/show/166050187",
+    "price_num": 7100000.0,
+    "modelYear": 2014
   },
   {
     "city": "Шымкент",
@@ -747,7 +950,10 @@
     "color": "",
     "engine": "2.5 (бензин)",
     "price": "9 700 000 ₸",
-    "url": "https://kolesa.kz/a/show/166041211"
+    "url": "https://kolesa.kz/a/show/166041211",
+    "price_num": 9700000.0,
+    "mileage_num": 154000.0,
+    "modelYear": 2014
   },
   {
     "city": "Актау",
@@ -757,7 +963,9 @@
     "color": "черный",
     "engine": "2.4 (бензин)",
     "price": "6 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165583586"
+    "url": "https://kolesa.kz/a/show/165583586",
+    "price_num": 6200000.0,
+    "modelYear": 2006
   },
   {
     "city": "Есик",
@@ -767,7 +975,9 @@
     "color": "",
     "engine": "2.4 (бензин)",
     "price": "5 600 000 ₸",
-    "url": "https://kolesa.kz/a/show/166003352"
+    "url": "https://kolesa.kz/a/show/166003352",
+    "price_num": 5600000.0,
+    "modelYear": 2004
   },
   {
     "city": "Кызылорда",
@@ -777,7 +987,9 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "14 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165856319"
+    "url": "https://kolesa.kz/a/show/165856319",
+    "price_num": 14000000.0,
+    "modelYear": 2019
   },
   {
     "city": "Шымкент",
@@ -787,7 +999,10 @@
     "color": "черный",
     "engine": "2.4 (бензин)",
     "price": "6 700 000 ₸",
-    "url": "https://kolesa.kz/a/show/165782038"
+    "url": "https://kolesa.kz/a/show/165782038",
+    "price_num": 6700000.0,
+    "mileage_num": 447572.0,
+    "modelYear": 2007
   },
   {
     "city": "Шымкент",
@@ -797,7 +1012,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "15 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/165742932"
+    "url": "https://kolesa.kz/a/show/165742932",
+    "price_num": 15000000.0,
+    "mileage_num": 150000.0,
+    "modelYear": 2018
   },
   {
     "city": "Шымкент",
@@ -807,7 +1025,10 @@
     "color": "серый металлик",
     "engine": "2.5 (бензин)",
     "price": "11 800 000 ₸",
-    "url": "https://kolesa.kz/a/show/165946054"
+    "url": "https://kolesa.kz/a/show/165946054",
+    "price_num": 11800000.0,
+    "mileage_num": 163000.0,
+    "modelYear": 2011
   },
   {
     "city": "Алматы",
@@ -817,7 +1038,9 @@
     "color": "черный металлик",
     "engine": "2.2 (бензин)",
     "price": "3 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/165940890"
+    "url": "https://kolesa.kz/a/show/165940890",
+    "price_num": 3500000.0,
+    "modelYear": 2000
   },
   {
     "city": "Алматы",
@@ -827,7 +1050,10 @@
     "color": "серый",
     "engine": "2.5 (бензин)",
     "price": "8 590 000 ₸",
-    "url": "https://kolesa.kz/a/show/163925206"
+    "url": "https://kolesa.kz/a/show/163925206",
+    "price_num": 8590000.0,
+    "mileage_num": 148418.0,
+    "modelYear": 2010
   },
   {
     "city": "Шымкент",
@@ -837,7 +1063,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "18 400 000 ₸",
-    "url": "https://kolesa.kz/a/show/165627383"
+    "url": "https://kolesa.kz/a/show/165627383",
+    "price_num": 18400000.0,
+    "mileage_num": 7000.0,
+    "modelYear": 2023
   },
   {
     "city": "Алматы",
@@ -847,7 +1076,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "13 360 000 ₸",
-    "url": "https://kolesa.kz/a/show/159289263"
+    "url": "https://kolesa.kz/a/show/159289263",
+    "price_num": 13360000.0,
+    "mileage_num": 113510.0,
+    "modelYear": 2018
   },
   {
     "city": "Атырау",
@@ -857,7 +1089,10 @@
     "color": "серый",
     "engine": "2.5 (бензин)",
     "price": "9 150 000 ₸",
-    "url": "https://kolesa.kz/a/show/166222986"
+    "url": "https://kolesa.kz/a/show/166222986",
+    "price_num": 9150000.0,
+    "mileage_num": 207721.0,
+    "modelYear": 2013
   },
   {
     "city": "Каскелен",
@@ -867,7 +1102,10 @@
     "color": "бронза",
     "engine": "2.4 (бензин)",
     "price": "5 600 000 ₸",
-    "url": "https://kolesa.kz/a/show/165840141"
+    "url": "https://kolesa.kz/a/show/165840141",
+    "price_num": 5600000.0,
+    "mileage_num": 320761.0,
+    "modelYear": 2005
   },
   {
     "city": "Актау",
@@ -877,7 +1115,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "5 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/166221225"
+    "url": "https://kolesa.kz/a/show/166221225",
+    "price_num": 5200000.0,
+    "mileage_num": 242808.0,
+    "modelYear": 2011
   },
   {
     "city": "Шымкент",
@@ -887,7 +1128,10 @@
     "color": "белый",
     "engine": "2.5 (бензин)",
     "price": "9 850 000 ₸",
-    "url": "https://kolesa.kz/a/show/166193469"
+    "url": "https://kolesa.kz/a/show/166193469",
+    "price_num": 9850000.0,
+    "mileage_num": 250000.0,
+    "modelYear": 2012
   },
   {
     "city": "Атырау",
@@ -897,7 +1141,10 @@
     "color": "серебристый",
     "engine": "2.5 (бензин)",
     "price": "8 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166164619"
+    "url": "https://kolesa.kz/a/show/166164619",
+    "price_num": 8500000.0,
+    "mileage_num": 334.0,
+    "modelYear": 2011
   },
   {
     "city": "Шымкент",
@@ -907,7 +1154,10 @@
     "color": "серый металлик",
     "engine": "2.5 (бензин)",
     "price": "9 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165415694"
+    "url": "https://kolesa.kz/a/show/165415694",
+    "price_num": 9200000.0,
+    "mileage_num": 64000.0,
+    "modelYear": 2015
   },
   {
     "city": "Актобе",
@@ -917,7 +1167,9 @@
     "color": "белый",
     "engine": "2.4 (бензин)",
     "price": "6 190 000 ₸",
-    "url": "https://kolesa.kz/a/show/166116875"
+    "url": "https://kolesa.kz/a/show/166116875",
+    "price_num": 6190000.0,
+    "modelYear": 2007
   },
   {
     "city": "Актау",
@@ -927,7 +1179,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "10 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/162146842"
+    "url": "https://kolesa.kz/a/show/162146842",
+    "price_num": 10500000.0,
+    "mileage_num": 305000.0,
+    "modelYear": 2013
   },
   {
     "city": "Атырау",
@@ -937,7 +1192,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "6 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166017489"
+    "url": "https://kolesa.kz/a/show/166017489",
+    "price_num": 6500000.0,
+    "mileage_num": 128640.0,
+    "modelYear": 2015
   },
   {
     "city": "Шымкент",
@@ -947,7 +1205,10 @@
     "color": "зеленый",
     "engine": "2.5 (бензин)",
     "price": "5 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/162936129"
+    "url": "https://kolesa.kz/a/show/162936129",
+    "price_num": 5500000.0,
+    "mileage_num": 201000.0,
+    "modelYear": 2013
   },
   {
     "city": "Кызылорда",
@@ -957,7 +1218,9 @@
     "color": "бирюзовый",
     "engine": "2.4 (бензин)",
     "price": "5 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165874786"
+    "url": "https://kolesa.kz/a/show/165874786",
+    "price_num": 5200000.0,
+    "modelYear": 2003
   },
   {
     "city": "Алматы",
@@ -967,7 +1230,10 @@
     "color": "черный",
     "engine": "2.5 (бензин)",
     "price": "14 290 000 ₸",
-    "url": "https://kolesa.kz/a/show/161983378"
+    "url": "https://kolesa.kz/a/show/161983378",
+    "price_num": 14290000.0,
+    "mileage_num": 55405.0,
+    "modelYear": 2021
   },
   {
     "city": "Тараз",
@@ -977,7 +1243,10 @@
     "color": "белый металлик",
     "engine": "3 (бензин)",
     "price": "7 000 000 ₸",
-    "url": "https://kolesa.kz/a/show/142761971"
+    "url": "https://kolesa.kz/a/show/142761971",
+    "price_num": 7000000.0,
+    "mileage_num": 181495.0,
+    "modelYear": 2003
   },
   {
     "city": "Астана",
@@ -987,7 +1256,10 @@
     "color": "черный металлик",
     "engine": "2.5 (бензин)",
     "price": "9 500 000 ₸",
-    "url": "https://kolesa.kz/a/show/166064342"
+    "url": "https://kolesa.kz/a/show/166064342",
+    "price_num": 9500000.0,
+    "mileage_num": 158000.0,
+    "modelYear": 2013
   },
   {
     "city": "Петропавловск",
@@ -997,6 +1269,9 @@
     "color": "серебристый",
     "engine": "2.5 (бензин)",
     "price": "15 200 000 ₸",
-    "url": "https://kolesa.kz/a/show/165830078"
+    "url": "https://kolesa.kz/a/show/165830078",
+    "price_num": 15200000.0,
+    "mileage_num": 115000.0,
+    "modelYear": 2019
   }
 ]
