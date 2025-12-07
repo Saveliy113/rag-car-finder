@@ -1,0 +1,1002 @@
+[
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2005 г.",
+    "generation": "2004 - 2006 XV30 рестайлинг (V35)",
+    "mileage": "286 000 км",
+    "color": "серебристый металлик",
+    "engine": "2.4 (бензин)",
+    "price": "4 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/166222492"
+  },
+  {
+    "city": "Жанакорган",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "125 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "14 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165993644"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "",
+    "color": "",
+    "engine": "2.5 (бензин)",
+    "price": "8 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165125858"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "109 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "16 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165982504"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "109 577 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "13 850 000 ₸",
+    "url": "https://kolesa.kz/a/show/165956457"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 1995 г.",
+    "generation": "1991 - 1996 XV10",
+    "mileage": "350 000 км",
+    "color": "зеленый металлик",
+    "engine": "3 (бензин)",
+    "price": "2 650 000 ₸",
+    "url": "https://kolesa.kz/a/show/165933608"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "155 000 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "13 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165920755"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "113 445 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "12 820 000 ₸",
+    "url": "https://kolesa.kz/a/show/153570969"
+  },
+  {
+    "city": "Атырау",
+    "model": "Toyota Camry 2022 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "86 000 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "14 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166215736"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2008 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "282 448 км",
+    "color": "серый металлик",
+    "engine": "2.4 (бензин)",
+    "price": "7 300 000 ₸",
+    "url": "https://kolesa.kz/a/show/166212193"
+  },
+  {
+    "city": "Семей",
+    "model": "Toyota Camry 2016 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "165 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "12 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166207730"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "5 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "15 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/164380525"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "205 000 км",
+    "color": "черный металлик",
+    "engine": "3.5 (бензин)",
+    "price": "12 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/135776814"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "46 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "12 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165896697"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2021 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "16 500 км",
+    "color": "белый металлик",
+    "engine": "2.5 (гибрид)",
+    "price": "17 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/165848191"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "168 000 км",
+    "color": "коричневый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 400 000 ₸",
+    "url": "https://kolesa.kz/a/show/166161880"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "20 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "18 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165288557"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2012 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "242 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "7 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/165814463"
+  },
+  {
+    "city": "Семей",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "7 100 км",
+    "color": "бежевый",
+    "engine": "2.5 (бензин)",
+    "price": "21 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/163189565"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2006 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "300 000 км",
+    "color": "бежевый",
+    "engine": "2.4 (бензин)",
+    "price": "5 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/166128869"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2002 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "250 000 км",
+    "color": "золотистый",
+    "engine": "2.4 (бензин)",
+    "price": "5 400 000 ₸",
+    "url": "https://kolesa.kz/a/show/165767613"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "175 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "9 300 000 ₸",
+    "url": "https://kolesa.kz/a/show/165746877"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2006 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "",
+    "color": "синий металлик",
+    "engine": "2.4 (бензин)",
+    "price": "5 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/166005455"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2017 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "123 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (газ-бензин)",
+    "price": "10 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165985614"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2012 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "267 121 км",
+    "color": "серебристый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 300 000 ₸",
+    "url": "https://kolesa.kz/a/show/165669891"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "73 000 км",
+    "color": "белый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "15 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165957442"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2003 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "368 000 км",
+    "color": "серый",
+    "engine": "2.4 (бензин)",
+    "price": "4 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/166213313"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "12 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165538157"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2004 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "",
+    "color": "серебристый",
+    "engine": "2.4 (бензин)",
+    "price": "5 550 000 ₸",
+    "url": "https://kolesa.kz/a/show/165533252"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "69 511 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "13 360 000 ₸",
+    "url": "https://kolesa.kz/a/show/161229436"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2021 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "49 500 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "15 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165814187"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "233 919 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "10 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165808080"
+  },
+  {
+    "city": "Тараз",
+    "model": "Toyota Camry 2012 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "178 740 км",
+    "color": "серебристый",
+    "engine": "2.5 (бензин)",
+    "price": "10 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165806164"
+  },
+  {
+    "city": "Актобе",
+    "model": "Toyota Camry 2017 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "138 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "7 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/162802258"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "19 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/156718603"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry Luxe 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "",
+    "color": "красный",
+    "engine": "2.5 (бензин)",
+    "price": "21 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/161687185"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry Prestige 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "19 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/158004348"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry Prestige 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "",
+    "color": "красный",
+    "engine": "2.5 (бензин)",
+    "price": "19 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/160283326"
+  },
+  {
+    "city": "Кызылорда",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "160 800 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "8 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/165880229"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2015 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "175 000 км",
+    "color": "",
+    "engine": "2.5 (бензин)",
+    "price": "13 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165978682"
+  },
+  {
+    "city": "Актобе",
+    "model": "Toyota Camry 2009 г.",
+    "generation": "2009 - 2011 XV40 рестайлинг (V45)",
+    "mileage": "",
+    "color": "серебристый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "6 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/165744846"
+  },
+  {
+    "city": "Караганда",
+    "model": "Toyota Camry 2003 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "",
+    "color": "",
+    "engine": "3 (бензин)",
+    "price": "5 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165628521"
+  },
+  {
+    "city": "Атырау",
+    "model": "Toyota Camry 2011 г.",
+    "generation": "2009 - 2011 XV40 рестайлинг (V45)",
+    "mileage": "232 000 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "5 300 000 ₸",
+    "url": "https://kolesa.kz/a/show/165606126"
+  },
+  {
+    "city": "Костанай",
+    "model": "Toyota Camry 2006 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.4 (бензин)",
+    "price": "5 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/164591599"
+  },
+  {
+    "city": "Петропавловск",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "214 939 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "9 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165740185"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 1998 г.",
+    "generation": "1996 - 2000 XV20",
+    "mileage": "366 095 км",
+    "color": "жёлтый",
+    "engine": "2.2 (бензин)",
+    "price": "3 400 000 ₸",
+    "url": "https://kolesa.kz/a/show/166222217"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "186 383 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "12 590 000 ₸",
+    "url": "https://kolesa.kz/a/show/163136674"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "288 278 км",
+    "color": "серебристый",
+    "engine": "2.5 (бензин)",
+    "price": "12 010 000 ₸",
+    "url": "https://kolesa.kz/a/show/160000268"
+  },
+  {
+    "city": "Караганда",
+    "model": "Toyota Camry 2002 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "340 000 км",
+    "color": "черный металлик",
+    "engine": "2.4 (бензин)",
+    "price": "4 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165938008"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2005 г.",
+    "generation": "2004 - 2006 XV30 рестайлинг (V35)",
+    "mileage": "400 000 км",
+    "color": "черный металлик",
+    "engine": "3 (бензин)",
+    "price": "6 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166204611"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2017 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "14 590 000 ₸",
+    "url": "https://kolesa.kz/a/show/166205645"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 1999 г.",
+    "generation": "1996 - 2000 XV20",
+    "mileage": "",
+    "color": "",
+    "engine": "2.2 (бензин)",
+    "price": "2 900 000 ₸",
+    "url": "https://kolesa.kz/a/show/166199717"
+  },
+  {
+    "city": "Аягоз",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "181 704 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166198391"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2015 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/166188463"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2004 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "",
+    "color": "",
+    "engine": "2.4 (бензин)",
+    "price": "4 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165002832"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2022 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "54 927 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "12 510 000 ₸",
+    "url": "https://kolesa.kz/a/show/161653824"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2006 г.",
+    "generation": "2004 - 2006 XV30 рестайлинг (V35)",
+    "mileage": "259 169 км",
+    "color": "белый металлик",
+    "engine": "3 (бензин)",
+    "price": "4 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/165611828"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 1993 г.",
+    "generation": "1991 - 1996 XV10",
+    "mileage": "",
+    "color": "белый",
+    "engine": "3 (бензин)",
+    "price": "2 450 000 ₸",
+    "url": "https://kolesa.kz/a/show/166219209"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2010 г.",
+    "generation": "2009 - 2011 XV40 рестайлинг (V45)",
+    "mileage": "228 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "7 300 000 ₸",
+    "url": "https://kolesa.kz/a/show/166211941"
+  },
+  {
+    "city": "Аксай",
+    "model": "Toyota Camry 2005 г.",
+    "generation": "2004 - 2006 XV30 рестайлинг (V35)",
+    "mileage": "380 000 км",
+    "color": "серебристый металлик",
+    "engine": "2.4 (бензин)",
+    "price": "5 600 000 ₸",
+    "url": "https://kolesa.kz/a/show/166209259"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "10 250 000 ₸",
+    "url": "https://kolesa.kz/a/show/165879236"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "61 394 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "14 150 000 ₸",
+    "url": "https://kolesa.kz/a/show/166070590?fromUserSearch=1"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2017 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "131 000 км",
+    "color": "синий",
+    "engine": "2.5 (бензин)",
+    "price": "12 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/166202040"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "8 900 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "15 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166025697"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "1 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "16 700 000 ₸",
+    "url": "https://kolesa.kz/a/show/164761777"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "100 000 км",
+    "color": "синий",
+    "engine": "2.5 (бензин)",
+    "price": "10 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/166088310"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2007 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "240 000 км",
+    "color": "синий металлик",
+    "engine": "2.4 (бензин)",
+    "price": "6 350 000 ₸",
+    "url": "https://kolesa.kz/a/show/166007472"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2016 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "100 000 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "11 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165929848"
+  },
+  {
+    "city": "Актобе",
+    "model": "Toyota Camry 2007 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "252 613 км",
+    "color": "белый металлик",
+    "engine": "2.4 (бензин)",
+    "price": "6 400 000 ₸",
+    "url": "https://kolesa.kz/a/show/163521573"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "180 000 км",
+    "color": "синий",
+    "engine": "2.5 (бензин)",
+    "price": "14 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/166095976"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2022 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "",
+    "color": "серебристый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "13 600 000 ₸",
+    "url": "https://kolesa.kz/a/show/166081472"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "128 164 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "15 550 000 ₸",
+    "url": "https://kolesa.kz/a/show/166073803"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "125 000 км",
+    "color": "",
+    "engine": "2.5 (бензин)",
+    "price": "11 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/166064806"
+  },
+  {
+    "city": "Уральск",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "7 100 000 ₸",
+    "url": "https://kolesa.kz/a/show/166050187"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2014 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "154 000 км",
+    "color": "",
+    "engine": "2.5 (бензин)",
+    "price": "9 700 000 ₸",
+    "url": "https://kolesa.kz/a/show/166041211"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2006 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "",
+    "color": "черный",
+    "engine": "2.4 (бензин)",
+    "price": "6 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165583586"
+  },
+  {
+    "city": "Есик",
+    "model": "Toyota Camry 2004 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "",
+    "color": "",
+    "engine": "2.4 (бензин)",
+    "price": "5 600 000 ₸",
+    "url": "https://kolesa.kz/a/show/166003352"
+  },
+  {
+    "city": "Кызылорда",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "14 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165856319"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2007 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "447 572 км",
+    "color": "черный",
+    "engine": "2.4 (бензин)",
+    "price": "6 700 000 ₸",
+    "url": "https://kolesa.kz/a/show/165782038"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "150 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "15 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/165742932"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2011 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "163 000 км",
+    "color": "серый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "11 800 000 ₸",
+    "url": "https://kolesa.kz/a/show/165946054"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2000 г.",
+    "generation": "2000 - 2001 XV20 рестайлинг (V25)",
+    "mileage": "",
+    "color": "черный металлик",
+    "engine": "2.2 (бензин)",
+    "price": "3 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/165940890"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2010 г.",
+    "generation": "2009 - 2011 XV40 рестайлинг (V45)",
+    "mileage": "148 418 км",
+    "color": "серый",
+    "engine": "2.5 (бензин)",
+    "price": "8 590 000 ₸",
+    "url": "https://kolesa.kz/a/show/163925206"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2023 г.",
+    "generation": "2020 - н.в. XV70 рестайлинг (V75)",
+    "mileage": "7 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "18 400 000 ₸",
+    "url": "https://kolesa.kz/a/show/165627383"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2018 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "113 510 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "13 360 000 ₸",
+    "url": "https://kolesa.kz/a/show/159289263"
+  },
+  {
+    "city": "Атырау",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "207 721 км",
+    "color": "серый",
+    "engine": "2.5 (бензин)",
+    "price": "9 150 000 ₸",
+    "url": "https://kolesa.kz/a/show/166222986"
+  },
+  {
+    "city": "Каскелен",
+    "model": "Toyota Camry 2005 г.",
+    "generation": "2004 - 2006 XV30 рестайлинг (V35)",
+    "mileage": "320 761 км",
+    "color": "бронза",
+    "engine": "2.4 (бензин)",
+    "price": "5 600 000 ₸",
+    "url": "https://kolesa.kz/a/show/165840141"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2011 г.",
+    "generation": "2009 - 2011 XV40 рестайлинг (V45)",
+    "mileage": "242 808 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "5 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/166221225"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2012 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "250 000 км",
+    "color": "белый",
+    "engine": "2.5 (бензин)",
+    "price": "9 850 000 ₸",
+    "url": "https://kolesa.kz/a/show/166193469"
+  },
+  {
+    "city": "Атырау",
+    "model": "Toyota Camry 2011 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "334 км",
+    "color": "серебристый",
+    "engine": "2.5 (бензин)",
+    "price": "8 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166164619"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2015 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "64 000 км",
+    "color": "серый металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165415694"
+  },
+  {
+    "city": "Актобе",
+    "model": "Toyota Camry 2007 г.",
+    "generation": "2006 - 2009 XV40",
+    "mileage": "",
+    "color": "белый",
+    "engine": "2.4 (бензин)",
+    "price": "6 190 000 ₸",
+    "url": "https://kolesa.kz/a/show/166116875"
+  },
+  {
+    "city": "Актау",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "305 000 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "10 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/162146842"
+  },
+  {
+    "city": "Атырау",
+    "model": "Toyota Camry 2015 г.",
+    "generation": "2014 - 2018 XV50 рестайлинг (V55)",
+    "mileage": "128 640 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "6 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166017489"
+  },
+  {
+    "city": "Шымкент",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "201 000 км",
+    "color": "зеленый",
+    "engine": "2.5 (бензин)",
+    "price": "5 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/162936129"
+  },
+  {
+    "city": "Кызылорда",
+    "model": "Toyota Camry 2003 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "",
+    "color": "бирюзовый",
+    "engine": "2.4 (бензин)",
+    "price": "5 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165874786"
+  },
+  {
+    "city": "Алматы",
+    "model": "Toyota Camry 2021 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "55 405 км",
+    "color": "черный",
+    "engine": "2.5 (бензин)",
+    "price": "14 290 000 ₸",
+    "url": "https://kolesa.kz/a/show/161983378"
+  },
+  {
+    "city": "Тараз",
+    "model": "Toyota Camry 2003 г.",
+    "generation": "2001 - 2004 XV30",
+    "mileage": "181 495 км",
+    "color": "белый металлик",
+    "engine": "3 (бензин)",
+    "price": "7 000 000 ₸",
+    "url": "https://kolesa.kz/a/show/142761971"
+  },
+  {
+    "city": "Астана",
+    "model": "Toyota Camry 2013 г.",
+    "generation": "2011 - 2014 XV50",
+    "mileage": "158 000 км",
+    "color": "черный металлик",
+    "engine": "2.5 (бензин)",
+    "price": "9 500 000 ₸",
+    "url": "https://kolesa.kz/a/show/166064342"
+  },
+  {
+    "city": "Петропавловск",
+    "model": "Toyota Camry 2019 г.",
+    "generation": "2017 - 2021 XV70",
+    "mileage": "115 000 км",
+    "color": "серебристый",
+    "engine": "2.5 (бензин)",
+    "price": "15 200 000 ₸",
+    "url": "https://kolesa.kz/a/show/165830078"
+  }
+]
