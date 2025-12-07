@@ -34,6 +34,7 @@ def extract_filters_from_query(query: str, openai_client) -> dict:
 Query: "{query}"
 
 Extract the following information if mentioned:
+- model: Car model name (e.g., "Toyota Camry", "Camry", "Toyota")
 - max_price: Maximum price in tenge (extract numeric value, e.g., "до 15 000 000 тенге" -> 15000000)
 - min_price: Minimum price in tenge
 - max_mileage: Maximum mileage in km (extract numeric value)
@@ -45,6 +46,7 @@ Extract the following information if mentioned:
 
 Return ONLY valid JSON in this format:
 {{
+    "model": null or string,
     "max_price": null or number,
     "min_price": null or number,
     "max_mileage": null or number,
@@ -179,6 +181,15 @@ def build_qdrant_filter(filters: dict) -> Filter:
     return None
 
 
+def has_car_model_in_query(query: str) -> bool:
+    """Check if query contains a car model name (like Toyota, Camry, etc.)"""
+    # Common car model keywords
+    car_keywords = ["toyota", "camry"]
+    query_lower = query.lower()
+    # Check if any car keyword is mentioned
+    return any(keyword in query_lower for keyword in car_keywords)
+
+
 def sort_results_by_year_preference(results, filters: dict):
     """Sort results by year preference (newest/oldest) if specified"""
     if not filters.get("year_preference"):
@@ -219,13 +230,16 @@ async def search_cars(request: RagQueryRequest):
 
         log(f"Processing query: {request.question}")
 
-        # Extracting and building filters from query using GPT
+        # Extracting filters from query using GPT
         log("Extracting filters from query")
         filters = extract_filters_from_query(request.question, openai_client)
-        qdrant_filter = build_qdrant_filter(filters)
-
-        # Creating embedding for the query
-        try:
+        
+        model_in_query = filters.get("model")
+        
+        # If model is specified - do embedding + query_points
+        if model_in_query:
+            log("Model found in filters, using vector similarity search")
+            # Creating embedding for the query
             log("Creating embedding for query")
             embedding_response = openai_client.embeddings.create(
                 model=EMBEDDING_MODEL,
@@ -233,21 +247,11 @@ async def search_cars(request: RagQueryRequest):
             )
             query_embedding = embedding_response.data[0].embedding
             log("Embedding created successfully")
-        except (OpenAIError, APIError) as e:
-            log_error(f"OpenAI embedding error: {e}")
-            raise HTTPException(
-                status_code=503,
-                detail=f"Failed to create embedding: {str(e)}"
-            )
-
-        # Searching in Qdrant with filters
-        try:
-            log(f"Searching Qdrant with top_k={request.top_k}, filters: {filters}")
             
-            # Use query_points with query_vector and query_filter for direct filtering in Qdrant
+            qdrant_filter = build_qdrant_filter(filters)
             query_params = {
                 "collection_name": COLLECTION_NAME,
-                "query": query_embedding,  # Use query_vector, not query
+                "query": query_embedding,
                 "limit": request.top_k
             }
             
@@ -256,30 +260,67 @@ async def search_cars(request: RagQueryRequest):
                 log(f"Applying Qdrant filter directly: {qdrant_filter}")
             
             query_result = qdrant_client.query_points(**query_params)
-            search_results = query_result.points if hasattr(query_result, 'points') else []
+            candidates = query_result.points if hasattr(query_result, 'points') else []
             
-            log(f"Search returned {len(search_results)} results (filters applied in Qdrant)")
-
+            log(f"Vector search returned {len(candidates)} results")
+            
             # Filter by similarity threshold
             filtered_results = [
-                result for result in search_results
+                result for result in candidates
                 if result.score >= SIMILARITY_THRESHOLD
             ]
+            candidates = filtered_results
+        else:
+            # If model is NOT specified - fallback mode
+            # Get all cars and apply only filters
+            log("No model in filters, using scroll with filters")
+            scroll_filter = build_qdrant_filter(filters)
+            points = []
+            next_page = None
             
-            # Sort by year preference if specified (newest/oldest)
-            filtered_results = sort_results_by_year_preference(filtered_results, filters)
+            while True:
+                scroll_params = {
+                    "collection_name": COLLECTION_NAME,
+                    "limit": 100
+                }
+                
+                if scroll_filter:
+                    scroll_params["scroll_filter"] = scroll_filter
+                
+                if next_page is not None:
+                    scroll_params["offset"] = next_page
+                
+                scroll_result = qdrant_client.scroll(**scroll_params)
+                
+                # scroll returns (points, next_page_offset) tuple
+                if isinstance(scroll_result, tuple):
+                    scroll_points, next_page = scroll_result
+                else:
+                    scroll_points = scroll_result
+                    next_page = None
+                
+                points.extend(scroll_points)
+                
+                if next_page is None:
+                    break
             
-            log(
-                f"Found {len(filtered_results)} results after filtering "
-                f"(from {len(search_results)} initial results)"
-            )
-            search_results = filtered_results
-        except (UnexpectedResponse, Exception) as e:
-            log_error(f"Qdrant search error: {e}")
-            raise HTTPException(
-                status_code=503,
-                detail=f"Vector database search failed: {str(e)}"
-            )
+            # Convert scroll points to match query_points format (with score=1.0)
+            class ScoredPointWrapper:
+                def __init__(self, point):
+                    self.id = point.id if hasattr(point, 'id') else None
+                    self.payload = point.payload if hasattr(point, 'payload') else point
+                    self.score = 1.0  # Default score for scroll results
+            
+            candidates = [ScoredPointWrapper(point) for point in points]
+            log(f"Scroll returned {len(candidates)} results (filters applied in Qdrant)")
+        
+        # Sort by year preference if specified (newest/oldest)
+        candidates = sort_results_by_year_preference(candidates, filters)
+        
+        # Limit to top_k after sorting
+        search_results = candidates[:request.top_k]
+        
+        log(f"Final results: {len(search_results)} cars")
 
         # Handle empty results
         if not search_results:
@@ -338,40 +379,25 @@ If no cars truly match the customer's requirements, politely explain this and su
         log("Sending request to OpenAI chat completion")
 
         # Generate response using OpenAI
-        try:
-            chat_response = openai_client.chat.completions.create(
-                model=CHAT_MODEL,
-                messages=[
-                    {"role": "system", "content": system_message},
-                    {"role": "user", "content": user_prompt}
-                ],
-                temperature=CHAT_TEMPERATURE,
-                max_tokens=1000
-            )
+        chat_response = openai_client.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {"role": "system", "content": system_message},
+                {"role": "user", "content": user_prompt}
+            ],
+            temperature=CHAT_TEMPERATURE,
+            max_tokens=1000
+        )
 
-            answer = chat_response.choices[0].message.content
-            log("Successfully generated response")
+        answer = chat_response.choices[0].message.content
+        log("Successfully generated response")
 
-            return answer
+        return answer
 
-        except (OpenAIError, APIError) as e:
-            log_error(f"OpenAI chat completion error: {e}")
-            raise HTTPException(
-                status_code=503,
-                detail=f"Failed to generate response: {str(e)}"
-            )
-
-    except HTTPException:
-        # Re-raise HTTP exceptions as-is
-        raise
-    except ValueError as e:
-        # Handle validation errors
-        log_error(f"Validation error: {e}")
-        raise HTTPException(status_code=400, detail=str(e))
     except Exception as e:
-        # Catch-all for unexpected errors
-        log_error(f"Unexpected error in search_cars: {e}")
+        # Single catch-all exception handler
+        log_error(f"Error in search_cars: {e}")
         raise HTTPException(
             status_code=500,
-            detail=f"An unexpected error occurred: {str(e)}"
+            detail=f"An error occurred: {str(e)}"
         )
