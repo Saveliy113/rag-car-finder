@@ -145,7 +145,7 @@ def build_qdrant_filter(filters: dict) -> Filter:
                 match=MatchValue(value=filters["year_preference"])
             )
         )
-        # Note: "newest" and "oldest" will be handled by sorting after search
+        # "newest" and "oldest" will be handled by sorting after search
     
     # Color filter
     if filters.get("color"):
@@ -177,54 +177,6 @@ def build_qdrant_filter(filters: dict) -> Filter:
     if conditions:
         return Filter(must=conditions)
     return None
-
-
-def _matches_filter(car_payload: dict, filters: dict) -> bool:
-    """Check if car matches filter criteria (for post-processing fallback)"""
-    # Price filter
-    if filters.get("max_price") is not None:
-        price_num = car_payload.get("price_num")
-        if price_num is None or price_num > filters["max_price"]:
-            return False
-    
-    if filters.get("min_price") is not None:
-        price_num = car_payload.get("price_num")
-        if price_num is None or price_num < filters["min_price"]:
-            return False
-    
-    # Mileage filter
-    if filters.get("max_mileage") is not None:
-        mileage_num = car_payload.get("mileage_num")
-        if mileage_num is not None and mileage_num > filters["max_mileage"]:
-            return False
-    
-    if filters.get("min_mileage") is not None:
-        mileage_num = car_payload.get("mileage_num")
-        if mileage_num is not None and mileage_num < filters["min_mileage"]:
-            return False
-    
-    # Year filter (exact match only, newest/oldest handled by sorting)
-    if filters.get("year_preference") and isinstance(filters["year_preference"], int):
-        model_year = car_payload.get("modelYear")
-        if model_year != filters["year_preference"]:
-            return False
-    
-    # Color filter
-    if filters.get("color"):
-        if car_payload.get("color") != filters["color"]:
-            return False
-    
-    # City filter
-    if filters.get("city"):
-        if car_payload.get("city") != filters["city"]:
-            return False
-    
-    # Engine filter
-    if filters.get("engine"):
-        if car_payload.get("engine") != filters["engine"]:
-            return False
-    
-    return True
 
 
 def sort_results_by_year_preference(results, filters: dict):
@@ -261,7 +213,7 @@ async def search_cars(request: RagQueryRequest):
     4. Uses GPT to generate a natural language response with recommendations
     """
     try:
-        # Get clients (already initialized at startup)
+        # Get clients
         qdrant_client = get_qdrant_client()
         openai_client = get_openai_client()
 
@@ -292,37 +244,21 @@ async def search_cars(request: RagQueryRequest):
         try:
             log(f"Searching Qdrant with top_k={request.top_k}, filters: {filters}")
             
-            # query_points doesn't support filters in this Qdrant client version
-            # So we'll search without filter and apply filters in post-processing
-            # This is still efficient as we get top results first, then filter
+            # Use query_points with query_vector and query_filter for direct filtering in Qdrant
+            query_params = {
+                "collection_name": COLLECTION_NAME,
+                "query": query_embedding,  # Use query_vector, not query
+                "limit": request.top_k
+            }
             
-            query_result = qdrant_client.query_points(
-                collection_name=COLLECTION_NAME,
-                query=query_embedding,
-                limit=request.top_k * 5 if qdrant_filter else request.top_k  # Get more if filtering
-            )
+            if qdrant_filter:
+                query_params["query_filter"] = qdrant_filter
+                log(f"Applying Qdrant filter directly: {qdrant_filter}")
             
-            # Extract points from QueryResult
-            if hasattr(query_result, 'points'):
-                search_results = query_result.points
-            elif isinstance(query_result, list):
-                search_results = query_result
-            else:
-                search_results = []
+            query_result = qdrant_client.query_points(**query_params)
+            search_results = query_result.points if hasattr(query_result, 'points') else []
             
-            log(f"Initial search returned {len(search_results)} results")
-            
-            # Apply filters in post-processing (since query_points doesn't support filters)
-            if qdrant_filter and len(search_results) > 0:
-                original_count = len(search_results)
-                search_results = [
-                    r for r in search_results
-                    if _matches_filter(r.payload, filters)
-                ]
-                log(f"After filtering: {original_count} -> {len(search_results)} results")
-                
-                # If we filtered out too many, we might need more results
-                # But for now, just use what we have
+            log(f"Search returned {len(search_results)} results (filters applied in Qdrant)")
 
             # Filter by similarity threshold
             filtered_results = [
@@ -345,7 +281,7 @@ async def search_cars(request: RagQueryRequest):
                 detail=f"Vector database search failed: {str(e)}"
             )
 
-        # Step 3: Handle empty results
+        # Handle empty results
         if not search_results:
             log("No results found above similarity threshold")
             return (
@@ -354,7 +290,7 @@ async def search_cars(request: RagQueryRequest):
                 "or consider different specifications."
             )
 
-        # Step 4: Format car data for prompt (including city and similarity scores)
+        # Format car data for prompt (including city and similarity scores)
         log("Formatting car data for prompt")
         cars_list = []
         for idx, doc in enumerate(search_results, 1):
@@ -375,7 +311,7 @@ async def search_cars(request: RagQueryRequest):
         cars_text = "\n\n".join(cars_list)
         log(f"Formatted {len(cars_list)} cars for prompt")
 
-        # Step 5: Create structured prompt
+        # Create structured prompt
         system_message = (
             "You are an expert car consultant specializing in Toyota Camry "
             "vehicles. Your role is to help customers find the best car that "
@@ -401,7 +337,7 @@ If no cars truly match the customer's requirements, politely explain this and su
 
         log("Sending request to OpenAI chat completion")
 
-        # Step 6: Generate response using OpenAI
+        # Generate response using OpenAI
         try:
             chat_response = openai_client.chat.completions.create(
                 model=CHAT_MODEL,
