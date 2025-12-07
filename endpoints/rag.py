@@ -264,12 +264,11 @@ async def search_cars(request: RagQueryRequest):
             
             log(f"Vector search returned {len(candidates)} results")
             
-            # Filter by similarity threshold
-            filtered_results = [
+            # Filter by similarity threshold (only for vector search)
+            candidates = [
                 result for result in candidates
                 if result.score >= SIMILARITY_THRESHOLD
             ]
-            candidates = filtered_results
         else:
             # If model is NOT specified - fallback mode
             # Get all cars and apply only filters
@@ -279,39 +278,19 @@ async def search_cars(request: RagQueryRequest):
             next_page = None
             
             while True:
-                scroll_params = {
-                    "collection_name": COLLECTION_NAME,
-                    "limit": 100
-                }
-                
-                if scroll_filter:
-                    scroll_params["scroll_filter"] = scroll_filter
-                
-                if next_page is not None:
-                    scroll_params["offset"] = next_page
-                
-                scroll_result = qdrant_client.scroll(**scroll_params)
-                
-                # scroll returns (points, next_page_offset) tuple
-                if isinstance(scroll_result, tuple):
-                    scroll_points, next_page = scroll_result
-                else:
-                    scroll_points = scroll_result
-                    next_page = None
-                
+                scroll_points, next_page = qdrant_client.scroll(
+                    collection_name=COLLECTION_NAME,
+                    limit=100,
+                    scroll_filter=qdrant_filter,
+                    offset=next_page
+                )
+
                 points.extend(scroll_points)
-                
+
                 if next_page is None:
                     break
-            
-            # Convert scroll points to match query_points format (with score=1.0)
-            class ScoredPointWrapper:
-                def __init__(self, point):
-                    self.id = point.id if hasattr(point, 'id') else None
-                    self.payload = point.payload if hasattr(point, 'payload') else point
-                    self.score = 1.0  # Default score for scroll results
-            
-            candidates = [ScoredPointWrapper(point) for point in points]
+
+                candidates = points
             log(f"Scroll returned {len(candidates)} results (filters applied in Qdrant)")
         
         # Sort by year preference if specified (newest/oldest)
@@ -335,8 +314,8 @@ async def search_cars(request: RagQueryRequest):
         log("Formatting car data for prompt")
         cars_list = []
         for idx, doc in enumerate(search_results, 1):
-            car = doc.payload
-            similarity = doc.score
+            car = doc.payload if hasattr(doc, 'payload') else doc
+            similarity = getattr(doc, 'score', 1.0)  # Default to 1.0 for scroll results
             cars_list.append(
                 f"{idx}. Model: {car.get('model', 'N/A')}\n"
                 f"   Generation: {car.get('generation', 'N/A')}\n"
