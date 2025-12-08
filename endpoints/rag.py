@@ -281,7 +281,7 @@ async def search_cars(request: RagQueryRequest):
                 scroll_points, next_page = qdrant_client.scroll(
                     collection_name=COLLECTION_NAME,
                     limit=100,
-                    scroll_filter=qdrant_filter,
+                    scroll_filter=scroll_filter,
                     offset=next_page
                 )
 
@@ -290,7 +290,7 @@ async def search_cars(request: RagQueryRequest):
                 if next_page is None:
                     break
 
-                candidates = points
+            candidates = points
             log(f"Scroll returned {len(candidates)} results (filters applied in Qdrant)")
         
         # Sort by year preference if specified (newest/oldest)
