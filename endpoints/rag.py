@@ -5,7 +5,7 @@ from openai import OpenAIError, APIError
 from qdrant_client.http.exceptions import UnexpectedResponse
 from qdrant_client.models import Filter, FieldCondition, Range, MatchValue
 
-from models.models import RagQueryRequest
+from models.models import RagQueryRequest, RagQueryResponse
 from loaders import get_qdrant_client, get_openai_client
 
 # Loggers
@@ -212,7 +212,7 @@ def sort_results_by_year_preference(results, filters: dict):
     return results
 
 
-@router.post("/search")
+@router.post("/search", response_model=RagQueryResponse)
 async def search_cars(request: RagQueryRequest):
     """
     Search for cars using RAG (Retrieval-Augmented Generation)
@@ -304,10 +304,10 @@ async def search_cars(request: RagQueryRequest):
         # Handle empty results
         if not search_results:
             log("No results found above similarity threshold")
-            return (
-                "I'm sorry, but I couldn't find any Toyota Camry cars that "
-                "match your criteria. Please try adjusting your search terms "
-                "or consider different specifications."
+            return RagQueryResponse(
+                data="I'm sorry, but I couldn't find any Toyota Camry cars that "
+                     "match your criteria. Please try adjusting your search terms "
+                     "or consider different specifications."
             )
 
         # Format car data for prompt (including city and similarity scores)
@@ -371,7 +371,7 @@ If no cars truly match the customer's requirements, politely explain this and su
         answer = chat_response.choices[0].message.content
         log("Successfully generated response")
 
-        return answer
+        return RagQueryResponse(data=answer)
 
     except Exception as e:
         # Single catch-all exception handler

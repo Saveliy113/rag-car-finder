@@ -11,5 +11,8 @@ class RagQueryRequest(BaseModel):
             raise ValueError('Question cannot be empty')
         return v.strip()
 
+class RagQueryResponse(BaseModel):
+    data: str
+
 class AliveResponse(BaseModel):
     status: str
