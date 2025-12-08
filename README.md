@@ -2,6 +2,11 @@
 
 A Retrieval-Augmented Generation (RAG) system for intelligent car search and recommendation, specifically designed for Toyota Camry vehicles. This system combines semantic vector search with structured filtering to provide natural language-based car discovery and personalized recommendations.
 
+## Links
+
+- 📹 [System Overview Video](https://drive.google.com/file/d/1UmPNPIe3d7JlsuyKP-eufP3iFq_gJnhi/view?usp=drive_link)
+- 🔗 [GitHub Repository](https://github.com/Saveliy113/rag-car-finder)
+
 ## Main Idea
 
 The main idea of this test project is to allow users to find cars using natural language queries. Instead of traditional keyword-based search, users can ask questions like "Find me a silver Toyota Camry under 5 million tenge in Almaty" and receive intelligent, context-aware recommendations.
