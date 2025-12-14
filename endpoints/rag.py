@@ -34,7 +34,7 @@ def extract_filters_from_query(query: str, openai_client) -> dict:
 Query: "{query}"
 
 Extract the following information if mentioned:
-- model: Car model name (e.g., "Toyota Camry", "Camry", "Toyota")
+- model: Car model name 
 - max_price: Maximum price in tenge (extract numeric value, e.g., "до 15 000 000 тенге" -> 15000000)
 - min_price: Minimum price in tenge
 - max_mileage: Maximum mileage in km (extract numeric value)
@@ -180,16 +180,6 @@ def build_qdrant_filter(filters: dict) -> Filter:
         return Filter(must=conditions)
     return None
 
-
-def has_car_model_in_query(query: str) -> bool:
-    """Check if query contains a car model name (like Toyota, Camry, etc.)"""
-    # Common car model keywords
-    car_keywords = ["toyota", "camry"]
-    query_lower = query.lower()
-    # Check if any car keyword is mentioned
-    return any(keyword in query_lower for keyword in car_keywords)
-
-
 def sort_results_by_year_preference(results, filters: dict):
     """Sort results by year preference (newest/oldest) if specified"""
     if not filters.get("year_preference"):
@@ -235,7 +225,6 @@ async def search_cars(request: RagQueryRequest):
         filters = extract_filters_from_query(request.question, openai_client)
         
         model_in_query = filters.get("model")
-        
         # If model is specified - do embedding + query_points
         if model_in_query:
             log("Model found in filters, using vector similarity search")
@@ -270,28 +259,52 @@ async def search_cars(request: RagQueryRequest):
                 if result.score >= SIMILARITY_THRESHOLD
             ]
         else:
-            # If model is NOT specified - fallback mode
-            # Get all cars and apply only filters
-            log("No model in filters, using scroll with filters")
-            scroll_filter = build_qdrant_filter(filters)
-            points = []
-            next_page = None
+            # If model is NOT specified - generate polite response asking for clarification
+            log("No model specified in query, generating polite response to ask for details")
             
-            while True:
-                scroll_points, next_page = qdrant_client.scroll(
-                    collection_name=COLLECTION_NAME,
-                    limit=100,
-                    scroll_filter=scroll_filter,
-                    offset=next_page
+            clarification_prompt = """A customer has contacted our car selling service but hasn't specified which car model they're looking for.
+
+Generate a polite, friendly, and welcoming response in English asking them to specify:
+- The exact car model they're interested in
+- Their preferences (price range, mileage, color, city, engine type, year, etc.)
+
+IMPORTANT RULES:
+- DO NOT use placeholders, brackets, variables, or any template-like content (e.g., [Customer's Name], {{name}}, etc.)
+- DO NOT include any information that wasn't provided by the customer
+- Write a direct, concrete response as if you're speaking directly to the customer
+- Keep the tone professional, helpful, and welcoming
+- Make it clear that providing more details will help us find the best car for their needs
+- Write 2-3 sentences maximum, be concise and direct
+
+Example of what to write (use this style but make it natural):
+"Hello and welcome to our car selling service. To find the best car for your needs, we need you to specify the exact model and your preferences. Please let us know what car model you're interested in, along with any preferences regarding price, mileage, color, city, engine type, or year. We're waiting for your information!"
+
+Example of what NOT to write (avoid this):
+"Dear [Customer's Name], thank you for contacting us... [insert details here]..." """
+
+            try:
+                clarification_response = openai_client.chat.completions.create(
+                    model=CHAT_MODEL,
+                    messages=[
+                        {"role": "system", "content": "You are a friendly and helpful car sales assistant. Always be polite and welcoming. Respond in English. Never use placeholders, brackets, or template variables. Always write direct, concrete responses."},
+                        {"role": "user", "content": clarification_prompt}
+                    ],
+                    temperature=0.5,
+                    max_tokens=200
                 )
-
-                points.extend(scroll_points)
-
-                if next_page is None:
-                    break
-
-            candidates = points
-            log(f"Scroll returned {len(candidates)} results (filters applied in Qdrant)")
+                
+                polite_answer = clarification_response.choices[0].message.content.strip()
+                log(f"Generated clarification response: {polite_answer[:100]}...")
+                
+                return RagQueryResponse(data=polite_answer)
+            except Exception as e:
+                log_error(f"Error generating clarification response: {e}")
+                # Fallback response if LLM fails
+                return RagQueryResponse(
+                    data="Hello and welcome to our car selling service! To find the best car for your needs, "
+                         "we need you to specify the exact model and your preferences (price, mileage, color, "
+                         "city, engine type, etc.). We're waiting for information from you!"
+                )
         
         # Sort by year preference if specified (newest/oldest)
         candidates = sort_results_by_year_preference(candidates, filters)
@@ -305,9 +318,8 @@ async def search_cars(request: RagQueryRequest):
         if not search_results:
             log("No results found above similarity threshold")
             return RagQueryResponse(
-                data="I'm sorry, but I couldn't find any Toyota Camry cars that "
-                     "match your criteria. Please try adjusting your search terms "
-                     "or consider different specifications."
+                data="I'm sorry, but I couldn't find any cars that match your criteria. "
+                     "Please try adjusting your search terms or consider different specifications."
             )
 
         # Format car data for prompt (including city and similarity scores)
@@ -333,25 +345,23 @@ async def search_cars(request: RagQueryRequest):
 
         # Create structured prompt
         system_message = (
-            "You are an expert car consultant specializing in Toyota Camry "
-            "vehicles. Your role is to help customers find the best car that "
+            "You are an expert car consultant. Your role is to help customers find the best car that "
             "matches their needs and preferences. You provide clear, helpful "
             "recommendations based on the available inventory."
         )
 
         user_prompt = f"""A customer is asking: "{request.question}"
 
-Below are Toyota Camry cars from our inventory that match their query (sorted by relevance):
+Below are cars from our inventory that match their query (sorted by relevance):
 
 {cars_text}
 
 Please provide a helpful recommendation following these guidelines:
 1. Analyze the customer's question and identify their key requirements (price range, mileage, color, location, etc.)
-2. Recommend the best matching car(s) from the list above (maximum 3 cars)
+2. Recommend the best matching car(s) from the list above
 3. For each recommended car, clearly state why it matches their needs
-4. If the customer asks for a car model other than Toyota Camry, politely explain that we only have Toyota Camry vehicles available
-5. Format your response in a friendly, conversational manner
-6. Include the URL for each recommended car so the customer can view more details
+4. Format your response in a friendly, conversational manner
+5. Include the URL for each recommended car so the customer can view more details
 
 If no cars truly match the customer's requirements, politely explain this and suggest alternative criteria."""
 
