@@ -197,3 +197,41 @@ def generate_recommendation_response(
         log_error(f"Error generating recommendation response: {e}")
         raise
 
+
+def detect_query_type(query: str, openai_client, chat_model: str) -> dict:
+    """
+    Detect the type of query - general question or a query related to cars
+    Returns a dictionary with 'type' and 'message' keys
+    """
+    try:
+        response = openai_client.chat.completions.create(
+            model=chat_model,
+            messages=[
+                {"role": "system", "content": """
+                You are an expert car consultant. Your task is to meet clients in our system and help them find the best car that matches their needs and preferences.
+                You needto detect if the client is asking a general question or a query related to cars.
+                The outpust format should be a JSON object with the following fields:
+                - type: "general" or "recommendation" - boolean value
+                - message: Leave empty if type is "recommendation" or a generated response if type is "general"
+                For any general question you should generate a polite and helpful response that will help the client to understand that we are responsible only for choosing cars in our showroom.
+                Don't provide any information which is not related to our services.
+                """},
+                {"role": "user", "content": query}
+            ],
+            temperature=0.1,
+            max_tokens=100
+        )
+        
+        # Parse the JSON response
+        json_str = response.choices[0].message.content.strip()
+        # Remove markdown code blocks if present
+        json_str = json_str.replace('```json', '').replace('```', '').strip()
+        query_type_data = json.loads(json_str)
+        
+        return query_type_data
+    except json.JSONDecodeError as e:
+        log_error(f"Error parsing query type JSON: {e}")
+        return {"type": "recommendation", "message": ""}
+    except Exception as e:
+        log_error(f"Error detecting query type: {e}")
+        return {"type": "recommendation", "message": ""}

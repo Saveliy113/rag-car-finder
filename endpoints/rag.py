@@ -1,3 +1,4 @@
+import json
 import os
 from fastapi import APIRouter, HTTPException
 from dotenv import load_dotenv
@@ -7,7 +8,8 @@ from utils.openai_queries import (
     extract_filters_from_query,
     create_embedding,
     generate_clarification_response,
-    generate_recommendation_response
+    generate_recommendation_response,
+    detect_query_type
 )
 from utils.rag_filters import build_qdrant_filter, sort_results_by_year_preference
 from loaders import get_qdrant_client, get_openai_client
@@ -38,7 +40,21 @@ async def search_cars(request: RagQueryRequest):
 
         log(f"Processing query: {request.question}")
 
-        # Extracting filters from query using GPT
+        # Detecting query type - general question or a query related to cars
+        query_type_data = detect_query_type(request.question, openai_client, chat_model)
+        
+        query_type = query_type_data.get("type", "recommendation")
+        message = query_type_data.get("message", "")
+        
+        if query_type == "general":
+            log("General question detected, returning response without car search")
+            return RagQueryResponse(
+                data=message if message else "I'm here to help you find the perfect car from our showroom. Please let me know what car you're looking for!"
+            )
+        else:
+            log(f"Car-related query detected (type: {query_type}), proceeding with car search")
+
+        # Extracting filters from query using GPT (for car-related queries)
         log("Extracting filters from query")
         filters = extract_filters_from_query(request.question, openai_client, chat_model)
         
