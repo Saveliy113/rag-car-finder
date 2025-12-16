@@ -19,6 +19,7 @@ def log_error(msg):
 # Configuration
 COLLECTION_NAME = "cars"
 EMBEDDING_MODEL = "text-embedding-3-small"
+CHAT_MODEL = "gpt-4o-mini"
 VECTOR_SIZE = 1536
 
 # Initializing quadrant and openAI clients
@@ -34,9 +35,49 @@ if not openai_api_key:
 client_openai = OpenAI(api_key=openai_api_key)
 log("Clients initialized")
 
-# Function which creates embedding from key words
-def create_text_for_embedding(car):
-    return f"{car['model']}, {car['generation']}, {car['mileage']}, {car['color']}, {car['engine']}, цена {car['price']}"
+# Function which creates semantic description using OpenAI
+def create_semantic_description(car):
+    """
+    Use OpenAI to generate a semantic description of the car for embedding.
+    This description focuses on semantic meaning rather than exact filter values.
+    """
+    prompt = f"""Create a natural, semantic description of this car for search purposes. 
+Focus on describing the car in a way that would help someone find it through natural language queries.
+
+Car details:
+- Model: {car.get('model', 'N/A')}
+- Generation: {car.get('generation', 'N/A')}
+- Year: {car.get('modelYear', 'N/A')}
+- Color: {car.get('color', 'N/A')}
+- Engine: {car.get('engine', 'N/A')}
+- Mileage: {car.get('mileage', 'N/A')}
+- City: {car.get('city', 'N/A')}
+- Price: {car.get('price', 'N/A')}
+
+Write a natural, conversational description that captures the essence of this car.
+Focus on semantic meaning - describe what kind of car it is, its characteristics, and what someone might search for.
+Do NOT include exact numeric values like specific prices or mileage numbers in the description.
+Instead, describe them semantically (e.g., "affordable", "low mileage", "recent model", etc.).
+
+Keep it concise (2-3 sentences) and natural. Write in English."""
+
+    try:
+        response = client_openai.chat.completions.create(
+            model=CHAT_MODEL,
+            messages=[
+                {"role": "system", "content": "You are a helpful assistant that creates natural, semantic descriptions of cars for search purposes."},
+                {"role": "user", "content": prompt}
+            ],
+            temperature=0.3,
+            max_tokens=150
+        )
+        description = response.choices[0].message.content.strip()
+        log(f"Generated semantic description: {description[:100]}...")
+        return description
+    except Exception as e:
+        log_error(f"Error generating semantic description: {e}")
+        # Fallback to a simple description if OpenAI fails
+        return f"{car.get('model', 'Car')} {car.get('generation', '')} in {car.get('color', '')} color with {car.get('engine', '')} engine"
 
 # Function creating embedings via openAI API
 def get_embedding(text):
@@ -87,17 +128,27 @@ def start():
 
     log(f"Loaded {len(cars)} cars")
 
-    log("Creating embeddings and saving to Qdrant")
+    log("Creating semantic descriptions and embeddings, then saving to Qdrant")
     points = []
     for i, car in enumerate(cars):
-        log(f"Car: {car}")
-        text = create_text_for_embedding(car)
-        embedding = get_embedding(text)
+        log(f"Processing car {i+1}/{len(cars)}: {car.get('model', 'N/A')}")
+        
+        # Generate semantic description using OpenAI
+        semantic_description = create_semantic_description(car)
+        
+        # Create embedding from semantic description
+        embedding = get_embedding(semantic_description)
+        
+        # Save embedding with full car data in payload (for filtering)
         points.append({
             "id": i,
             "vector": embedding,
-            "payload": car # car metadata
+            "payload": car  # All filter data stays in payload
         })
+        
+        # Log progress every 10 cars
+        if (i + 1) % 10 == 0:
+            log(f"Processed {i + 1}/{len(cars)} cars...")
     
     log(f"Saving {len(points)} points to Qdrant")
     qdrant.upsert(collection_name=COLLECTION_NAME, points=points)
