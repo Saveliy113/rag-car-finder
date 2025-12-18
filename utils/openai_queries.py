@@ -86,60 +86,7 @@ def create_embedding(query: str, openai_client, embedding_model: str) -> list:
     except Exception as e:
         log_error(f"Error creating embedding: {e}")
         raise
-
-
-def get_clarification_prompt() -> str:
-    """Generate prompt for asking user to provide more details"""
-    return """A customer has contacted our car selling service but hasn't specified which car model they're looking for.
-
-Generate a polite, friendly, and welcoming response in English asking them to specify:
-- The exact car model they're interested in
-- Their preferences (price range, mileage, color, city, engine type, year, etc.)
-
-IMPORTANT RULES:
-- DO NOT use placeholders, brackets, variables, or any template-like content (e.g., [Customer's Name], {{name}}, etc.)
-- DO NOT include any information that wasn't provided by the customer
-- Write a direct, concrete response as if you're speaking directly to the customer
-- Keep the tone professional, helpful, and welcoming
-- Make it clear that providing more details will help us find the best car for their needs
-- Write 2-3 sentences maximum, be concise and direct
-
-Example of what to write (use this style but make it natural):
-"Hello and welcome to our car selling service. To find the best car for your needs, we need you to specify the exact model and your preferences. Please let us know what car model you're interested in, along with any preferences regarding price, mileage, color, city, engine type, or year. We're waiting for your information!"
-
-Example of what NOT to write (avoid this):
-"Dear [Customer's Name], thank you for contacting us... [insert details here]..." """
-
-
-def generate_clarification_response(openai_client, chat_model: str) -> str:
-    """
-    Generate a polite response asking user to provide more details
-    Returns the generated response text
-    """
-    clarification_prompt = get_clarification_prompt()
-    
-    try:
-        clarification_response = openai_client.chat.completions.create(
-            model=chat_model,
-            messages=[
-                {"role": "system", "content": "You are a friendly and helpful car sales assistant. Always be polite and welcoming. Respond in English. Never use placeholders, brackets, or template variables. Always write direct, concrete responses."},
-                {"role": "user", "content": clarification_prompt}
-            ],
-            temperature=0.5,
-            max_tokens=200
-        )
         
-        return clarification_response.choices[0].message.content.strip()
-    except Exception as e:
-        log_error(f"Error generating clarification response: {e}")
-        # Fallback response if LLM fails
-        return (
-            "Hello and welcome to our car selling service! To find the best car for your needs, "
-            "we need you to specify the exact model and your preferences (price, mileage, color, "
-            "city, engine type, etc.). We're waiting for information from you!"
-        )
-
-
 def get_recommendation_system_message() -> str:
     """Get system message for car recommendation"""
     return (

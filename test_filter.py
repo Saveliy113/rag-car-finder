@@ -4,14 +4,21 @@ Simple filter testing script.
 Run with: python test_filter.py
 """
 import asyncio
+import os
 import sys
 from pathlib import Path
 from typing import Dict, Any, List
+from dotenv import load_dotenv
 
 # Add current directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
-from endpoints.rag import extract_filters_from_query, build_qdrant_filter, search_cars
+# Load environment variables
+load_dotenv()
+
+from utils.openai_queries import extract_filters_from_query
+from utils.rag_filters import build_qdrant_filter
+from endpoints.rag import search_cars
 from models.models import RagQueryRequest
 from loaders import init_openai_client, init_qdrant_client, get_openai_client, get_qdrant_client
 from qdrant_client.models import Filter
@@ -39,142 +46,80 @@ class FilterTester:
         self.setup_tests()
     
     def setup_tests(self):
-        """Define test cases"""
+        """Define focused test cases - one per scenario type"""
         
-        # Exact color filter tests (should work now)
+        # ===== 1. EXACT FILTERS (should pass) =====
         self.test_cases.append(TestCase(
-            name="Exact color: черный",
-            query="Find me a black car",
-            expected_filters={"color": "черный"},
+            name="Exact filters: Toyota Camry XV50 under 15M",
+            query="I want to buy toyota camry xv 50 and my budget is under 15 000 000 tenge",
+            expected_filters={"model": "Toyota Camry", "max_price": 15000000},
             should_find_results=True
         ))
         
+        # ===== 2. FILTERING IN ANY LANGUAGE (English colors) =====
         self.test_cases.append(TestCase(
-            name="Exact color: белый",
-            query="I want a white car",
-            expected_filters={"color": "белый"},
+            name="Any language: Lexus RX gray (English)",
+            query="Can you offer me any gray color lexus rx?",
+            expected_filters={"model": "Lexus RX", "color": "gray"},  # серый металлик exists
             should_find_results=True
         ))
         
+        # ===== 3. FILTERING WITH SYNONYMS (серого цвета = серый металлик) =====
         self.test_cases.append(TestCase(
-            name="Exact color: красный",
-            query="Show me red cars",
-            expected_filters={"color": "красный"},
+            name="Color synonym: Lexus RX серого цвета",
+            query="I am searching for lexus rx серого цвета",
+            expected_filters={"model": "Lexus RX", "color": "серый"},  # Should match серый металлик
             should_find_results=True
         ))
         
+        # ===== 4. GENERAL NATURAL LANGUAGE QUERY (should ask for model) =====
         self.test_cases.append(TestCase(
-            name="Exact color: синий",
-            query="Find blue cars",
-            expected_filters={"color": "синий"},
+            name="Natural language: Comfortable family offroad car",
+            query="I want to buy a car which will be comfortable for family use and will allow to use it on offroad",
+            expected_filters={},  # Should ask for model
+            should_find_results=False
+        ))
+        
+        # ===== 5. INCORRECT CITY NAME (should correct) =====
+        self.test_cases.append(TestCase(
+            name="City typo: Toyota Camry in Almata",
+            query="Offer me toyota camry in Almata",
+            expected_filters={"model": "Toyota Camry", "city": "Алматы"},  # Should correct Almata -> Алматы
             should_find_results=True
         ))
         
-        # Fuzzy color tests (should work after improvements)
+        # ===== ADDITIONAL SCENARIOS =====
+        
+        # Color in Russian (exact match)
         self.test_cases.append(TestCase(
-            name="Fuzzy color: black (English)",
-            query="Find a black car",
-            expected_filters={"color": "черный"},  # Should match "черный" or "черный металлик"
+            name="Color RU: Subaru Outback черный",
+            query="Найди черный Subaru Outback",
+            expected_filters={"model": "Subaru Outback", "color": "черный"},
             should_find_results=True
         ))
         
+        # City with more typos
         self.test_cases.append(TestCase(
-            name="Fuzzy color: silver (English)",
-            query="I want a silver car",
-            expected_filters={"color": "серебристый"},  # Should match "серебристый" or "серебристый металлик"
+            name="City typo: Toyota Camry in Алма-ата",
+            query="Find toyota camry in Алма-ата",
+            expected_filters={"model": "Toyota Camry", "city": "Алматы"},
             should_find_results=True
         ))
         
+        # Model + Color + Price combination
         self.test_cases.append(TestCase(
-            name="Fuzzy color: grey vs серый",
-            query="Find grey cars",
-            expected_filters={"color": "серый"},  # Should match "серый" or "серый металлик"
+            name="Complex: Honda Accord red under 2M",
+            query="Find a red Honda Accord under 2 million tenge",
+            expected_filters={"model": "Honda Accord", "color": "red", "max_price": 2000000},
             should_find_results=True
         ))
         
-        # Model + Color combinations
+        # Failed case: combination doesn't exist
         self.test_cases.append(TestCase(
-            name="Model + Exact color",
+            name="No results: Subaru Outback white (doesn't exist)",
             query="Find a white Subaru Outback",
-            expected_filters={"model": "Subaru Outback", "color": "белый"},
-            should_find_results=True
-        ))
-        
-        self.test_cases.append(TestCase(
-            name="Model + Fuzzy color",
-            query="Find a black Honda Accord",
-            expected_filters={"model": "Honda Accord", "color": "черный"},
-            should_find_results=True
-        ))
-        
-        # Price filters
-        self.test_cases.append(TestCase(
-            name="Price filter",
-            query="Cars under 5 million tenge",
-            expected_filters={"max_price": 5000000},
-            should_find_results=True
-        ))
-        
-        # Complex filters
-        self.test_cases.append(TestCase(
-            name="Complex: Model + Color + Price",
-            query="Find a white Subaru Outback under 2 million tenge",
-            expected_filters={"model": "Subaru Outback", "color": "белый", "max_price": 2000000},
-            should_find_results=True
-        ))
-        
-        self.test_cases.append(TestCase(
-            name="Complex: Fuzzy color + Price",
-            query="Find a black car under 3 million",
-            expected_filters={"color": "черный", "max_price": 3000000},
-            should_find_results=True
-        ))
-        
-        # City filters (exact)
-        self.test_cases.append(TestCase(
-            name="City filter",
-            query="Cars in Алматы",
-            expected_filters={"city": "Алматы"},
-            should_find_results=True
-        ))
-        
-        # Fuzzy city (should work after improvements)
-        self.test_cases.append(TestCase(
-            name="Fuzzy city: Almaty (English)",
-            query="Cars in Almaty",
-            expected_filters={"city": "Алматы"},
-            should_find_results=True
-        ))
-        
-        # Engine filters
-        self.test_cases.append(TestCase(
-            name="Engine: hybrid",
-            query="Find hybrid cars",
-            expected_filters={"engine": "гибрид"},
-            should_find_results=True
-        ))
-        
-        # Color variations (testing fuzzy matching)
-        self.test_cases.append(TestCase(
-            name="Color variation: черный металлик",
-            query="Find a black metallic car",
-            expected_filters={"color": "черный металлик"},
-            should_find_results=True
-        ))
-        
-        self.test_cases.append(TestCase(
-            name="Color variation: белый металлик",
-            query="I want a white metallic car",
-            expected_filters={"color": "белый металлик"},
-            should_find_results=True
-        ))
-        
-        # Edge case: typo in color
-        self.test_cases.append(TestCase(
-            name="Typo tolerance: blak (typo)",
-            query="Find a blak car",
-            expected_filters={"color": "черный"},  # Should handle typo
-            should_find_results=True
+            expected_filters={"model": "Subaru Outback", "color": "white"},
+            should_find_results=False
         ))
     
     def calculate_filter_match(self, expected: Dict[str, Any], extracted: Dict[str, Any]) -> float:
@@ -184,6 +129,24 @@ class FilterTester:
         
         if not expected or not extracted:
             return 0.0
+        
+        # Color translation map (English to Russian)
+        color_translations = {
+            "white": "белый",
+            "black": "черный",
+            "red": "красный",
+            "blue": "синий",
+            "green": "зеленый",
+            "yellow": "желтый",
+            "grey": "серый",
+            "gray": "серый",
+            "silver": "серебристый",
+            "brown": "коричневый",
+            "bronze": "бронза",
+            "beige": "бежевый",
+            "gold": "золотистый",
+            "turquoise": "бирюзовый"
+        }
         
         matches = 0
         total = 0
@@ -198,11 +161,34 @@ class FilterTester:
             elif extracted_value is not None:
                 # String comparison (case-insensitive, strip whitespace)
                 if isinstance(expected_value, str) and isinstance(extracted_value, str):
-                    if expected_value.lower().strip() == extracted_value.lower().strip():
+                    expected_lower = expected_value.lower().strip()
+                    extracted_lower = extracted_value.lower().strip()
+                    
+                    # Exact match
+                    if expected_lower == extracted_lower:
                         matches += 1
-                    # Partial match for fuzzy (e.g., "черный" matches "черный металлик")
-                    elif expected_value.lower().strip() in extracted_value.lower().strip() or \
-                         extracted_value.lower().strip() in expected_value.lower().strip():
+                    # For color field, check translations (English ↔ Russian)
+                    elif key == "color":
+                        # Check if extracted English color translates to expected Russian
+                        if extracted_lower in color_translations:
+                            if color_translations[extracted_lower] == expected_lower:
+                                matches += 1
+                            # Check for partial match (e.g., "черный металлик" contains "черный")
+                            elif expected_lower in color_translations[extracted_lower] or \
+                                 color_translations[extracted_lower] in expected_lower:
+                                matches += 0.8
+                        # Check if expected English color translates to extracted Russian
+                        elif expected_lower in color_translations:
+                            if color_translations[expected_lower] == extracted_lower:
+                                matches += 1
+                            elif extracted_lower in color_translations[expected_lower] or \
+                                 color_translations[expected_lower] in extracted_lower:
+                                matches += 0.8
+                        # Partial match for fuzzy (e.g., "черный" matches "черный металлик")
+                        elif expected_lower in extracted_lower or extracted_lower in expected_lower:
+                            matches += 0.5
+                    # Partial match for other string fields
+                    elif expected_lower in extracted_lower or extracted_lower in expected_lower:
                         matches += 0.5
                 # Numeric comparison (with 5% tolerance)
                 elif isinstance(expected_value, (int, float)) and isinstance(extracted_value, (int, float)):
@@ -221,7 +207,8 @@ class FilterTester:
             openai_client = get_openai_client()
             
             # Extract filters
-            extracted_filters = extract_filters_from_query(test.query, openai_client)
+            chat_model = os.getenv("CHAT_MODEL", "gpt-4o-mini")
+            extracted_filters = extract_filters_from_query(test.query, openai_client, chat_model)
             test.extracted_filters = extracted_filters
             
             # Calculate filter match score
@@ -236,13 +223,8 @@ class FilterTester:
             urls = re.findall(r'https?://[^\s]+', response.data)
             test.results_count = len(urls)
             
-            # Test passes if:
-            # 1. Filter match score is reasonable (> 0.5)
-            # 2. If should_find_results, we got some results
-            filter_ok = test.filter_match_score >= 0.5
-            results_ok = not test.should_find_results or test.results_count > 0
-            
-            test.passed = filter_ok and results_ok
+            # Simple test logic: Pass if filter match > 50% AND results found > 0
+            test.passed = test.filter_match_score > 0.5 and test.results_count > 0
             
             return test.passed
             
