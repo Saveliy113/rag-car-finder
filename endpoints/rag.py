@@ -10,7 +10,11 @@ from utils.openai_queries import (
     generate_recommendation_response,
     detect_query_type
 )
-from utils.rag_filters import build_qdrant_filter, sort_results_by_year_preference
+from utils.rag_filters import (
+    build_qdrant_filter,
+    sort_results_by_year_preference,
+    calculate_dynamic_similarity_threshold
+)
 from loaders import get_qdrant_client, get_openai_client
 from models.models import RagQueryRequest, RagQueryResponse
 
@@ -31,7 +35,9 @@ async def search_cars(request: RagQueryRequest):
         openai_client = get_openai_client()
 
         # Load configuration from environment variables
-        similarity_threshold = float(os.getenv("SIMILARITY_THRESHOLD", "0.5"))
+        base_similarity_threshold = float(os.getenv("SIMILARITY_THRESHOLD", "0.5"))
+        min_similarity_threshold = float(os.getenv("MIN_SIMILARITY_THRESHOLD", "0.3"))
+        filter_threshold_increment = float(os.getenv("FILTER_THRESHOLD_INCREMENT", "0.05"))
         embedding_model = os.getenv("EMBEDDING_MODEL", "text-embedding-3-small")
         chat_model = os.getenv("CHAT_MODEL", "gpt-4o-mini")
         chat_temperature = float(os.getenv("CHAT_TEMPERATURE", "0.7"))
@@ -57,8 +63,17 @@ async def search_cars(request: RagQueryRequest):
         log("Extracting filters from query")
         filters = extract_filters_from_query(request.question, openai_client, chat_model)
         
+        # Calculate dynamic similarity threshold based on filter count
+        similarity_threshold = calculate_dynamic_similarity_threshold(
+            filters,
+            base_threshold=base_similarity_threshold,
+            min_threshold=min_similarity_threshold,
+            filter_increment=filter_threshold_increment
+        )
+        log(f"Using dynamic similarity threshold: {similarity_threshold:.2f} (base: {base_similarity_threshold}, min: {min_similarity_threshold})")
+        
         log("Model found in filters, using vector similarity search")
-         # Creating embedding for the query
+        # Creating embedding for the query
         log("Creating embedding for query")
         query_embedding = create_embedding(request.question, openai_client, embedding_model)
         log("Embedding created successfully")
@@ -79,14 +94,15 @@ async def search_cars(request: RagQueryRequest):
             
         log(f"Vector search returned {len(candidates)} results")
             
-        # Filter by similarity threshold (only for vector search)
+        # Filter by dynamic similarity threshold (only for vector search)
         candidates = [
             result for result in candidates
             if result.score >= similarity_threshold
         ]
+        log(f"After similarity threshold filtering: {len(candidates)} results")
         
         # Sort by year preference if specified (newest/oldest)
-        candidates = sort_results_by_year_preference(candidates, filters)
+        #candidates = sort_results_by_year_preference(candidates, filters)
         
         # Limit to top_k after sorting
         search_results = candidates[:request.top_k]
