@@ -322,6 +322,28 @@ class FilterTester:
                         print(f"    Error: {test.error}")
             print()
         
+        # Improvement Summary
+        print("=" * 70)
+        print("IMPROVEMENT SUMMARY")
+        print("=" * 70)
+        initial_pass_rate = 11.1  # Initial state: 1/9 tests passed (11.1%)
+        current_pass_rate = (passed / len(self.test_cases)) * 100
+        improvement = current_pass_rate - initial_pass_rate
+        improvement_percentage = (improvement / initial_pass_rate) * 100 if initial_pass_rate > 0 else 0
+        
+        print(f"Initial Pass Rate: {initial_pass_rate:.1f}% (1/9 tests)")
+        print(f"Current Pass Rate: {current_pass_rate:.1f}% ({passed}/{len(self.test_cases)} tests)")
+        print(f"Improvement: +{improvement:.1f} percentage points ({improvement_percentage:+.1f}% relative improvement)")
+        print()
+        
+        if improvement > 0:
+            print(f"✅ System improved by {improvement:.1f} percentage points!")
+        elif improvement == 0:
+            print("⚠️  No improvement detected")
+        else:
+            print(f"❌ System performance decreased by {abs(improvement):.1f} percentage points")
+        print()
+        
         print("=" * 70)
         
         return passed, failed
