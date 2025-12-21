@@ -15,6 +15,7 @@ from utils.rag_filters import (
     sort_results_by_year_preference,
     calculate_dynamic_similarity_threshold
 )
+from utils.synonyms import normalize_filters_to_canonical
 from loaders import get_qdrant_client, get_openai_client
 from models.models import RagQueryRequest, RagQueryResponse
 
@@ -62,6 +63,11 @@ async def search_cars(request: RagQueryRequest):
         # Extracting filters from query using GPT (for car-related queries)
         log("Extracting filters from query")
         filters = extract_filters_from_query(request.question, openai_client, chat_model)
+        
+        # Normalize filters to canonical values (colors and cities)
+        log("Normalizing filters to canonical values")
+        filters = normalize_filters_to_canonical(filters)
+        log(f"Normalized filters: {filters}")
         
         # Calculate dynamic similarity threshold based on filter count
         similarity_threshold = calculate_dynamic_similarity_threshold(

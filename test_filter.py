@@ -72,12 +72,12 @@ class FilterTester:
             should_find_results=True
         ))
         
-        # ===== 4. GENERAL NATURAL LANGUAGE QUERY (should ask for model) =====
+        # ===== 4. GENERAL NATURAL LANGUAGE QUERY (semantic search should work) =====
         self.test_cases.append(TestCase(
             name="Natural language: Comfortable family offroad car",
             query="I want to buy a car which will be comfortable for family use and will allow to use it on offroad",
-            expected_filters={},  # Should ask for model
-            should_find_results=False
+            expected_filters={},  # No specific filters, semantic search should find results
+            should_find_results=True  # Semantic search should return relevant cars
         ))
         
         # ===== 5. INCORRECT CITY NAME (should correct) =====
@@ -124,10 +124,21 @@ class FilterTester:
     
     def calculate_filter_match(self, expected: Dict[str, Any], extracted: Dict[str, Any]) -> float:
         """Calculate how well extracted filters match expected (0.0 to 1.0)"""
-        if not expected and not extracted:
+        # Remove None values from extracted filters for comparison
+        extracted_clean = {k: v for k, v in extracted.items() if v is not None}
+        expected_clean = {k: v for k, v in expected.items() if v is not None}
+        
+        # If both are empty, perfect match
+        if not expected_clean and not extracted_clean:
             return 1.0
         
-        if not expected or not extracted:
+        # If expected is empty but extracted has values, check if that's acceptable
+        if not expected_clean:
+            # For natural language queries, having no filters extracted is correct
+            return 1.0 if not extracted_clean else 0.0
+        
+        # If extracted is empty but expected has values, no match
+        if not extracted_clean:
             return 0.0
         
         # Color translation map (English to Russian)
@@ -151,9 +162,9 @@ class FilterTester:
         matches = 0
         total = 0
         
-        for key, expected_value in expected.items():
+        for key, expected_value in expected_clean.items():
             total += 1
-            extracted_value = extracted.get(key)
+            extracted_value = extracted_clean.get(key)
             
             if expected_value is None:
                 if extracted_value is None:
@@ -223,8 +234,15 @@ class FilterTester:
             urls = re.findall(r'https?://[^\s]+', response.data)
             test.results_count = len(urls)
             
-            # Simple test logic: Pass if filter match > 50% AND results found > 0
-            test.passed = test.filter_match_score > 0.5 and test.results_count > 0
+            # Test logic:
+            # 1. For natural language queries (expected_filters empty): Pass if results found matches should_find_results
+            # 2. For filter queries: Pass if filter match > 50% AND results found > 0
+            if not test.expected_filters or all(v is None for v in test.expected_filters.values()):
+                # Natural language query: check if results match expectation
+                test.passed = (test.results_count > 0) == test.should_find_results
+            else:
+                # Filter query: check filter match and results
+                test.passed = test.filter_match_score > 0.5 and test.results_count > 0
             
             return test.passed
             

@@ -1,10 +1,14 @@
 import json
 import os
+import sys
+from pathlib import Path
 from dotenv import load_dotenv
 from openai import OpenAI
 from qdrant_client import QdrantClient
 from qdrant_client.models import VectorParams, Distance
 from qdrant_client.http import models as rest
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from utils.synonyms import normalize_color_to_canonical, normalize_city_to_canonical
 
 # Load environment variables
 load_dotenv()
@@ -133,17 +137,46 @@ def start():
     for i, car in enumerate(cars):
         log(f"Processing car {i+1}/{len(cars)}: {car.get('model', 'N/A')}")
         
-        # Generate semantic description using OpenAI
+        # Normalize color and city to canonical values
+        car_normalized = car.copy()
+        
+        # Normalize color: save raw color and add canonical color
+        original_color = car.get('color', '')
+        if original_color:
+            car_normalized['color_raw'] = original_color
+            canonical_color = normalize_color_to_canonical(original_color)
+            if canonical_color:
+                car_normalized['color'] = canonical_color
+                if original_color.lower() != canonical_color.lower():
+                    log(f"  Color normalized: '{original_color}' → '{canonical_color}'")
+            else:
+                # If normalization fails, keep original as canonical
+                log(f"  Color normalization failed for '{original_color}', keeping as-is")
+        
+        # Normalize city: save raw city and add canonical city
+        original_city = car.get('city', '')
+        if original_city:
+            car_normalized['city_raw'] = original_city
+            canonical_city = normalize_city_to_canonical(original_city)
+            if canonical_city:
+                car_normalized['city'] = canonical_city
+                if original_city.lower() != canonical_city.lower():
+                    log(f"  City normalized: '{original_city}' → '{canonical_city}'")
+            else:
+                # If normalization fails, keep original as canonical
+                log(f"  City normalization failed for '{original_city}', keeping as-is")
+        
+        # Generate semantic description using OpenAI (use original values for description)
         semantic_description = create_semantic_description(car)
         
         # Create embedding from semantic description
         embedding = get_embedding(semantic_description)
         
-        # Save embedding with full car data in payload (for filtering)
+        # Save embedding with normalized car data in payload
         points.append({
             "id": i,
             "vector": embedding,
-            "payload": car  # All filter data stays in payload
+            "payload": car_normalized  # Normalized data with color_raw and city_raw
         })
         
         # Log progress every 10 cars
