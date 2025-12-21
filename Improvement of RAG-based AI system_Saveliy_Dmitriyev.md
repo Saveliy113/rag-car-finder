@@ -1,5 +1,7 @@
 # Improvement of RAG-based AI System
 
+**Repository:** [https://github.com/Saveliy113/rag-car-finder](https://github.com/Saveliy113/rag-car-finder)
+
 ## Overview
 
 The main idea of this project is to create an AI assistant which can help clients to choose cars among all the database data according to client requests. Here are some important metrics for such a system:
