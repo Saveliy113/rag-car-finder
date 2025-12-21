@@ -18,6 +18,7 @@ load_dotenv()
 
 from utils.openai_queries import extract_filters_from_query
 from utils.rag_filters import build_qdrant_filter
+from utils.synonyms import normalize_filters_to_canonical
 from endpoints.rag import search_cars
 from models.models import RagQueryRequest
 from loaders import init_openai_client, init_qdrant_client, get_openai_client, get_qdrant_client
@@ -178,6 +179,11 @@ class FilterTester:
                     # Exact match
                     if expected_lower == extracted_lower:
                         matches += 1
+                    # For model field, check partial match (case-insensitive)
+                    elif key == "model":
+                        # "Toyota Camry" should match "toyota camry" or "Toyota Camry XV50"
+                        if expected_lower in extracted_lower or extracted_lower in expected_lower:
+                            matches += 1
                     # For color field, check translations (English ↔ Russian)
                     elif key == "color":
                         # Check if extracted English color translates to expected Russian
@@ -220,10 +226,13 @@ class FilterTester:
             # Extract filters
             chat_model = os.getenv("CHAT_MODEL", "gpt-4o-mini")
             extracted_filters = extract_filters_from_query(test.query, openai_client, chat_model)
-            test.extracted_filters = extracted_filters
             
-            # Calculate filter match score
-            test.filter_match_score = self.calculate_filter_match(test.expected_filters, extracted_filters)
+            # Normalize filters to canonical values (same as in rag.py)
+            normalized_filters = normalize_filters_to_canonical(extracted_filters)
+            test.extracted_filters = normalized_filters  # Store normalized for comparison
+            
+            # Calculate filter match score using normalized filters
+            test.filter_match_score = self.calculate_filter_match(test.expected_filters, normalized_filters)
             
             # Run search to see if we get results
             request = RagQueryRequest(question=test.query, top_k=5)

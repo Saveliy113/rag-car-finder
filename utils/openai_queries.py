@@ -20,7 +20,14 @@ Extract the following information if mentioned:
 - min_price: Minimum price in tenge
 - max_mileage: Maximum mileage in km (extract numeric value)
 - min_mileage: Minimum mileage in km
-- color: Car color (exact match)
+- color: Car color - IMPORTANT: For Russian colors, normalize to base form (nominative case, masculine):
+  * "серого цвета" -> "серый"
+  * "красная" -> "красный"
+  * "черного" -> "черный"
+  * "белую" -> "белый"
+  * "зеленого" -> "зеленый"
+  Always convert Russian color adjectives to their base masculine nominative form.
+  For English colors, use lowercase (e.g., "red", "black", "white", "gray").
 - city: City name (exact match)
 - year_preference: "newest", "oldest", or specific year (e.g., 2020)
 - engine: Engine type (e.g., "2.5 (бензин)")
